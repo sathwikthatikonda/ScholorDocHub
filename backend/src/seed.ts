@@ -1,0 +1,554 @@
+import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+if (!supabaseUrl || !supabaseKey) {
+    console.error("❌ SUPABASE_URL or SUPABASE_KEY missing in .env file.");
+    process.exit(1);
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+const seedScholarships = [
+    // ALL INDIA / NATIONAL LEVEL SCHOLARSHIPS
+    {
+        name: "Pre-Matric Scholarship Scheme for Minorities",
+        provider: "Ministry of Minority Affairs, Govt of India",
+        eligibility_criteria: "Students belonging to minority communities (Muslim, Christian, Sikh, Buddhist, Jain, Parsi) studying in classes 1 to 10. Minimum 50% marks in previous final examination.",
+        education_level: ["10th", "Under 10th"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 100000,
+        marks_requirement: 50,
+        state: "All India",
+        description: "The scholarship at pre-matric level will encourage parents from minority communities to send their school going children to school, lighten their financial burden on school education and sustain their efforts to support their children to complete school education.",
+        benefits: "Admission fee, Tuition fee, and Maintenance allowance (ranging from ₹1,000 to ₹6,000 per annum depending on class and hosteler status).",
+        deadline: "2026-11-15T00:00:00Z",
+        required_documents: ["Aadhaar Card", "Income Certificate", "Community/Minority Certificate", "Previous Year Marksheet", "Bank Passbook"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: true,
+        disability_status: false
+    },
+    {
+        name: "Post-Matric Scholarship Scheme for Minorities",
+        provider: "Ministry of Minority Affairs, Govt of India",
+        eligibility_criteria: "Students from minority communities studying in Class 11, 12, UG, PG, M.Phil, Ph.D. Minimum 50% marks in previous examination.",
+        education_level: ["12th", "Diploma", "Undergraduate", "Postgraduate", "PhD"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 200000,
+        marks_requirement: 50,
+        state: "All India",
+        description: "Objective is to award scholarships to meritorious students belonging to economically weaker sections of minority community so as to provide them better opportunities for higher education.",
+        benefits: "Admission + Tuition fee up to ₹10,000 per annum. Maintenance allowance up to ₹10,000 per annum depending on course and hosteler status.",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["Aadhaar Card", "Income Certificate", "Minority Declaration", "Previous Marksheet", "Fee Receipt", "Bank Passbook"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: true,
+        disability_status: false
+    },
+    {
+        name: "Merit Cum Means Scholarship for Professional and Technical Courses CS",
+        provider: "Ministry of Minority Affairs",
+        eligibility_criteria: "For minority students pursuing professional or technical courses at UG/PG levels. Must have secured minimum 50% marks in previous exam.",
+        education_level: ["Undergraduate", "Postgraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 250000,
+        marks_requirement: 50,
+        state: "All India",
+        description: "Assistance to poor and meritorious students belonging to minority communities to enable them to pursue professional and technical courses.",
+        benefits: "Full course fee up to ₹20,000 per annum. Maintenance allowance up to ₹10,000 per annum.",
+        deadline: "2026-10-31T00:00:00Z",
+        required_documents: ["Aadhaar Card", "Income Certificate", "Minority Certificate", "Previous Marksheet", "College Fee Receipt"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: true,
+        disability_status: false
+    },
+    {
+        name: "Pre-Matric Scholarship for Students with Disabilities",
+        provider: "Department of Empowerment of Persons with Disabilities",
+        eligibility_criteria: "Students with 40% or more disability studying in Classes 9 and 10.",
+        education_level: ["10th", "Under 10th"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "To support students with disabilities to study further in order to prepare themselves to earn their livelihood.",
+        benefits: "Maintenance allowance ₹500 (Day Scholar) / ₹800 (Hosteler) per month. Book grant ₹1000 per annum. Disability allowances.",
+        deadline: "2026-11-15T00:00:00Z",
+        required_documents: ["Disability Certificate", "Aadhaar Card", "Income Certificate", "Previous Marksheet"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: true
+    },
+    {
+        name: "Post-Matric Scholarship for Students with Disabilities",
+        provider: "Department of Empowerment of Persons with Disabilities",
+        eligibility_criteria: "Students with 40% or more disability studying from Class 11 to PG Degree/Diploma.",
+        education_level: ["12th", "Diploma", "Undergraduate", "Postgraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "Financial assistance to students with disabilities for studying in recognized institutions post Class 10.",
+        benefits: "Maintenance allowance up to ₹1600/month. Book grant up to ₹1500/year. Reimbursement of compulsory non-refundable fees.",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["Disability Certificate", "Aadhaar Card", "Income Certificate", "Admission Proof"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: true
+    },
+    {
+        name: "Scholarships for Top Class Education for Students with Disabilities",
+        provider: "Department of Empowerment of Persons with Disabilities",
+        eligibility_criteria: "Students with 40%+ disability pursuing PG Diploma/Degree in recognized institutions of excellence.",
+        education_level: ["Postgraduate", "PhD"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 600000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "To recognize and promote quality education amongst students with disabilities by providing full financial support.",
+        benefits: "Full tuition fee reimbursement up to ₹2.00 Lakhs per annum. Maintenance allowance ₹3000/month. Special allowances ₹2000/month. Computer purchase grant ₹30,000.",
+        deadline: "2026-12-31T00:00:00Z",
+        required_documents: ["Disability Certificate", "Institute Admission Proof", "Income Certificate", "Aadhaar Card"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: true
+    },
+    {
+        name: "National Fellowship and Scholarship for Higher Education of ST Students",
+        provider: "Ministry of Tribal Affairs",
+        eligibility_criteria: "ST students pursuing M.Phil/Ph.D or UG/PG courses in Top Class Institutes.",
+        education_level: ["Undergraduate", "Postgraduate", "PhD"],
+        category: ["ST"],
+        income_limit: 600000,
+        marks_requirement: 50,
+        state: "All India",
+        description: "To encourage ST students to pursue higher education and research.",
+        benefits: "Fellowship: ₹31,000/month (JRF), ₹35,000/month (SRF). Scholarship: Full tuition fee, living expenses ₹2200/month, books ₹3000/year, computer ₹45000 (one time).",
+        deadline: "2026-12-31T00:00:00Z",
+        required_documents: ["ST Certificate", "Income Certificate", "Institute Admission Proof", "Aadhaar Card"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Central Sector Scheme of Scholarships for College and University Students",
+        provider: "Department of Higher Education",
+        eligibility_criteria: "Students above 80th percentile of successful candidates in the relevant stream from respective Board of Examination in Class 12. Must be pursuing regular courses.",
+        education_level: ["Undergraduate", "Postgraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 450000,
+        marks_requirement: 80, // Effectively 80th percentile
+        state: "All India",
+        description: "To provide financial assistance to meritorious students from low-income families to meet a part of their day-to-day expenses while pursuing higher studies.",
+        benefits: "₹12,000 per annum at UG level for 3 years. ₹20,000 per annum at PG level.",
+        deadline: "2026-10-31T00:00:00Z",
+        required_documents: ["Class 12 Marksheet", "Income Certificate", "Aadhaar Card", "Bank Passbook"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "AICTE Pragati Scholarship for Girls",
+        provider: "All India Council for Technical Education (AICTE)",
+        eligibility_criteria: "Girl students admitted to first year of Degree/Diploma course in an AICTE approved institution. Maximum two girls per family.",
+        education_level: ["Diploma", "Undergraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 800000,
+        marks_requirement: 0, // Merit based on qualifying exam
+        state: "All India",
+        description: "Scheme aiming at providing assistance for Advancement of Girls pursuing Technical Education.",
+        benefits: "₹50,000 per annum for every year of study for a maximum of 4 years for degree and 3 years for diploma.",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["Aadhaar Card", "Income Certificate", "Admission Letter", "Previous Marksheet", "Directorate of Tech Ed Approval"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "AICTE Saksham Scholarship Scheme for Specially Abled Student",
+        provider: "All India Council for Technical Education (AICTE)",
+        eligibility_criteria: "Specially abled students having disability of not less than 40%. Admitted to first year of Degree/Diploma course in an AICTE approved institution.",
+        education_level: ["Diploma", "Undergraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 800000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "Scheme intended to provide encouragement and support to specially abled children to pursue Technical Education.",
+        benefits: "₹50,000 per annum for every year of study.",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["Disability Certificate", "Aadhaar Card", "Income Certificate", "Admission Proof"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: true
+    },
+    {
+        name: "Prime Minister's Scholarship Scheme For RPF/RPSF",
+        provider: "Ministry of Railways",
+        eligibility_criteria: "Dependent wards of ex/serving RPF/RPSF personnel. Pursuing technical or professional degree courses. Minimum 60% marks in Class 12/Diploma/Graduation.",
+        education_level: ["Undergraduate", "Postgraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 0, // No specific limit mentioned, preference to lower ranks
+        marks_requirement: 60,
+        state: "All India",
+        description: "To encourage higher technical and professional education for the dependent wards of Railway Protection Force / Railway Protection Special Force personnel.",
+        benefits: "₹2,250 per month for girls. ₹2,000 per month for boys. Paid annually.",
+        deadline: "2026-10-31T00:00:00Z",
+        required_documents: ["Service Certificate", "Aadhaar Card", "Marksheet of Qualifying Exam"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Pre-Matric Scholarship for SC Students",
+        provider: "Ministry of Social Justice and Empowerment",
+        eligibility_criteria: "SC students studying in Classes 9 and 10 in recognized schools.",
+        education_level: ["10th", "Under 10th"],
+        category: ["SC"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "To support parents of SC children for education of their wards studying in classes IX and X so that the incidence of drop-out, especially in the transition from the elementary to the secondary stage is minimized.",
+        benefits: "Day Scholar: ₹225/month for 10 months + ₹750/year ad-hoc grant. Hosteler: ₹525/month + ₹1000/year ad-hoc grant.",
+        deadline: "2026-11-15T00:00:00Z",
+        required_documents: ["SC Certificate", "Income Certificate", "Aadhaar Card", "Bank Details"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Post-Matric Scholarship for SC Students",
+        provider: "Ministry of Social Justice and Empowerment",
+        eligibility_criteria: "SC students studying in post-matriculation or post-secondary stages.",
+        education_level: ["12th", "Diploma", "Undergraduate", "Postgraduate", "PhD"],
+        category: ["SC"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "To provide financial assistance to the Scheduled Caste students studying at post matriculation or post-secondary stage to enable them to complete their education.",
+        benefits: "Maintenance allowance ranging from ₹230 to ₹1200 per month. Reimbursement of non-refundable compulsory fees. Study tour charges, thesis typing/printing charges, book allowance.",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["SC Certificate", "Income Certificate", "Aadhaar", "Fee Receipts"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Top Class Education Scheme for SC Students",
+        provider: "Ministry of Social Justice and Empowerment",
+        eligibility_criteria: "SC students who have secured admission in notified institutions of excellence (IITs, IIMs, NITs, etc.).",
+        education_level: ["Undergraduate", "Postgraduate"],
+        category: ["SC"],
+        income_limit: 800000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "To recognize and promote quality education amongst students belonging to SCs by providing full financial support.",
+        benefits: "Full tuition fee and non-refundable charges. Living expenses ₹3000/month. Books and stationery ₹5000/year. Computer/Laptop ₹45,000 (one time).",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["SC Certificate", "Income Certificate", "Admission Proof to Notified Institution"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Pre-Matric Scholarship for OBC Students",
+        provider: "Ministry of Social Justice and Empowerment",
+        eligibility_criteria: "OBC students studying in Classes 1 to 10 in recognized schools.",
+        education_level: ["10th", "Under 10th"],
+        category: ["OBC"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "To support economically backward OBC students to study at pre-matric stage.",
+        benefits: "Maintenance allowance and ad-hoc grants varying by class and hosteler/day-scholar status.",
+        deadline: "2026-11-15T00:00:00Z",
+        required_documents: ["OBC Certificate", "Income Certificate", "Aadhaar Card", "Bank Details"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Post-Matric Scholarship for OBC Students",
+        provider: "Ministry of Social Justice and Empowerment",
+        eligibility_criteria: "OBC students studying at post-matriculation or post-secondary stage.",
+        education_level: ["12th", "Diploma", "Undergraduate", "Postgraduate", "PhD"],
+        category: ["OBC"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "To provide financial assistance to the OBC students studying at post-matriculation or post-secondary stage to enable them to complete their education.",
+        benefits: "Maintenance allowance ranging from ₹160 to ₹750 per month. Reimbursement of compulsory non-refundable fees.",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["OBC Certificate", "Income Certificate", "Aadhaar", "Fee Receipts"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Dr. Ambedkar Post-Matric Scholarship for EBC Students",
+        provider: "Ministry of Social Justice and Empowerment",
+        eligibility_criteria: "Students belonging to Economically Backward Classes (EBC) general category pursuing post-matric courses.",
+        education_level: ["12th", "Diploma", "Undergraduate", "Postgraduate", "PhD"],
+        category: ["General", "EWS"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "Financial assistance to EBC general category students pursuing post-matriculation courses.",
+        benefits: "Maintenance allowance ranging from ₹160 to ₹750 per month. Reimbursement of compulsory non-refundable fees.",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["Income Certificate", "Aadhaar Card", "Fee Receipts", "Previous Marksheet"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Mukhyamantri Medhavi Vidyarthi Yojana, Madhya Pradesh",
+        provider: "Government of Madhya Pradesh",
+        eligibility_criteria: "MP domicile. Secured 70% or more (MP Board) or 85% or more (CBSE/ICSE) in 12th. Admitted to preferred UG courses like Engineering, Medical, Law in recognized institutes.",
+        education_level: ["Undergraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 600000,
+        marks_requirement: 70,
+        state: "Madhya Pradesh",
+        description: "To financially assist talented students from MP pursuing higher education in prestigious national institutes or state colleges.",
+        benefits: "100% tuition fee waiver/reimbursement.",
+        deadline: "2026-12-31T00:00:00Z",
+        required_documents: ["MP Domicile Certificate", "12th Marksheet", "Income Certificate", "Aadhaar Card", "Admission Letter"],
+        official_website: "http://scholarshipportal.mp.nic.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "MahaDBT Post Matric Scholarship, Maharashtra",
+        provider: "Government of Maharashtra",
+        eligibility_criteria: "Maharashtra domicile. EBC, SC, ST, OBC, VJNT, SBC category students pursuing authorized courses.",
+        education_level: ["12th", "Diploma", "Undergraduate", "Postgraduate", "PhD"],
+        category: ["General", "EWS", "OBC", "SC", "ST"],
+        income_limit: 800000,
+        marks_requirement: 0,
+        state: "Maharashtra",
+        description: "Umbrella portal for all post-matric scholarships administered by Maharashtra government, including Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojna.",
+        benefits: "Tuition fee reimbursement ranging from 50% to 100%. Exam fee reimbursement. Maintenance allowance.",
+        deadline: "2026-12-31T00:00:00Z",
+        required_documents: ["Maharashtra Domicile Certificate", "Income Certificate", "Caste Certificate (if applicable)", "Previous Year Marksheet", "Fee Receipt"],
+        official_website: "https://mahadbt.maharashtra.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Swami Vivekananda Merit Cum Means Scholarship, West Bengal",
+        provider: "Government of West Bengal",
+        eligibility_criteria: "West Bengal domicile. Must pass out from WB board. Class 11/12 (60% marks). UG Arts/Commerce/Science (60% marks in 12th). PG (53% marks in Graduation).",
+        education_level: ["12th", "Undergraduate", "Postgraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 250000,
+        marks_requirement: 60,
+        state: "West Bengal",
+        description: "Assisting meritorious students of West Bengal belonging to economically backward families to automatically pursue higher studies.",
+        benefits: "₹1,000 to ₹5,000 per month depending on the level of course.",
+        deadline: "2026-11-30T00:00:00Z",
+        required_documents: ["WB Domicile", "Income Certificate", "Marksheet of Qualifying Exam", "Bank Passbook"],
+        official_website: "https://svmcm.wbhed.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Dr. YSR Vidyadheevena Scheme, Andhra Pradesh",
+        provider: "Government of Andhra Pradesh",
+        eligibility_criteria: "AP domicile. Pursuing Polytechnic, ITI, Degree, PG/Ph.D courses. Available for SC, ST, BC, EBC, Minorities, Kapu, and Differently Abled students.",
+        education_level: ["Diploma", "Undergraduate", "Postgraduate", "PhD"],
+        category: ["General", "OBC", "SC", "ST", "EWS"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "Andhra Pradesh",
+        description: "Provides full fee reimbursement to students belonging to poor families giving them access to higher education.",
+        benefits: "Full Fee Reimbursement (Tuition fee, special fee, other fees). Credited directly to mother's account in 4 quarters.",
+        deadline: "2026-12-31T00:00:00Z",
+        required_documents: ["AP Domicile/Aadhaar", "Income Certificate/Ration Card", "Caste Certificate", "Admission details"],
+        official_website: "https://jnanabhumi.ap.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Chief Minister's Scholarship Scheme for Higher Education, Delhi",
+        provider: "Delhi Government",
+        eligibility_criteria: "Student must be a resident of Delhi studying in a state university in Delhi.",
+        education_level: ["Undergraduate", "Postgraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 600000,
+        marks_requirement: 60,
+        state: "Delhi",
+        description: "Assists meritorious students from moderate backgrounds in Delhi.",
+        benefits: "Full fee waiver for income <₹2.5 Lakhs, 50% for ₹2.5-₹6 Lakhs.",
+        deadline: "2026-12-31T00:00:00Z",
+        required_documents: ["Delhi Domicile", "Income Certificate", "University Admission Proof"],
+        official_website: "https://edistrict.delhigovt.nic.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Vidyadhan Scholarship Program",
+        provider: "Sarojini Damodaran Foundation (Private)",
+        eligibility_criteria: "Students completing 10th grade. Minimum 90% or 9 CGPA in 10th. Available in selected states (Kerala, Karnataka, TN, Pondicherry, AP, Telangana, Gujarat, Maharashtra, Goa, Odisha).",
+        education_level: ["12th"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 200000,
+        marks_requirement: 90,
+        state: "All India", // Technically multi-state
+        description: "Private foundation scholarship aiming to support the college education of meritorious students from economically challenged families.",
+        benefits: "₹10,000 to ₹60,000 per year depending on the state and course of study (Plus 2, Degree).",
+        deadline: "2026-07-31T00:00:00Z",
+        required_documents: ["10th Marksheet", "Income Certificate", "Photograph"],
+        official_website: "https://www.vidyadhan.org/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Reliance Foundation Undergraduate Scholarships",
+        provider: "Reliance Foundation",
+        eligibility_criteria: "Resident Indian pursuing first-year of full-time UG degree in any stream. Aptitude test required.",
+        education_level: ["Undergraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 1500000,
+        marks_requirement: 60, // 12th passing marks
+        state: "All India",
+        description: "Aiming to support undergraduate students with a grant to pursue their higher education and empower them to unlock their potential.",
+        benefits: "Up to ₹2,000,000 over the duration of the degree. Includes alumni network access.",
+        deadline: "2026-10-15T00:00:00Z",
+        required_documents: ["12th Marksheet", "Income Proof", "Aptitude Test Score"],
+        official_website: "https://scholarships.reliancefoundation.org/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "HDFC Badhte Kadam Scholarship",
+        provider: "HDFC Bank",
+        eligibility_criteria: "Students from Class 11 to PG, inclusive of general, professional and vocational courses. Must have faced recent crisis (orphan/loss of parent/loss of livelihood).",
+        education_level: ["12th", "Diploma", "Undergraduate", "Postgraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 600000,
+        marks_requirement: 60, // Previous year marks
+        state: "All India",
+        description: "Aimed at helping students continue their education despite facing a recent life crisis or having a low family income.",
+        benefits: "Financial aid from ₹18,000 to ₹100,000 depending on the course of study.",
+        deadline: "2026-09-30T00:00:00Z",
+        required_documents: ["Marksheet", "Income Proof", "Proof of Crisis (Death cert/Job loss proof)"],
+        official_website: "https://www.hdfcbank.com/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Keep India Smiling Foundational Scholarship Programme",
+        provider: "Colgate-Palmolive (India) Limited",
+        eligibility_criteria: "Students enrolled in Class 11, Diploma, Graduation (Engineering/Vocational), and sportsmen. Minimum 60% in board exams.",
+        education_level: ["12th", "Diploma", "Undergraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 500000,
+        marks_requirement: 60,
+        state: "All India",
+        description: "Aims to provide foundational support to individuals who are deserving and meritorious but may lack resources to pursue their dreams.",
+        benefits: "Scholarship up to ₹30,000 per year for up to 4 years.",
+        deadline: "2026-03-31T00:00:00Z",
+        required_documents: ["Previous Marksheet", "Income Certificate", "Admission Proof"],
+        official_website: "https://www.colgate.com/en-in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "NSP Pre Matric Scholarship for SC Students, Karnataka",
+        provider: "Government of Karnataka",
+        eligibility_criteria: "SC students from Karnataka studying in classes 9 to 10.",
+        education_level: ["10th"],
+        category: ["SC"],
+        income_limit: 250000,
+        marks_requirement: 0,
+        state: "Karnataka",
+        description: "Financial assistance for SC students at secondary school level in Karnataka.",
+        benefits: "Maintenance allowance, book grants, and reimbursement of non-refundable fees.",
+        deadline: "2026-11-15T00:00:00Z",
+        required_documents: ["Caste Certificate", "Income Certificate", "Karnataka Domicile", "Aadhaar", "Bank Account Details"],
+        official_website: "https://ssp.postmatric.karnataka.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Pragati Scholarship Scheme For Technical Education",
+        provider: "Ministry of Education",
+        eligibility_criteria: "Only for Girls pursuing Technical Education (Degree/Diploma) from AICTE approved Institutions.",
+        education_level: ["Diploma", "Undergraduate"],
+        category: ["General", "OBC", "SC", "ST", "Minority"],
+        income_limit: 800000,
+        marks_requirement: 0,
+        state: "All India",
+        description: "Empowering Girls through Technical Education under the Pragati Scheme.",
+        benefits: "₹50,000/annum for every year of study.",
+        deadline: "2026-10-31T00:00:00Z",
+        required_documents: ["Aadhaar Card", "Income Certificate", "Admission Letter", "Previous Marksheet", "Directorate of Tech Ed Approval"],
+        official_website: "https://scholarships.gov.in/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Dr. APJ Abdul Kalam Ignite Awards",
+        provider: "National Innovation Foundation (NIF)",
+        eligibility_criteria: "Students up to class 12 or out of school up to the age of 17 years. Based on original technological ideas/innovations.",
+        education_level: ["10th", "12th"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 0,
+        marks_requirement: 0,
+        state: "All India",
+        description: "National competition of original technological ideas and innovations by children.",
+        benefits: "Financial support for prototyping, patenting, and recognition.",
+        deadline: "2026-08-31T00:00:00Z",
+        required_documents: ["Innovation Details", "Proof of Identity", "School ID"],
+        official_website: "http://nif.org.in/ignite/",
+        minority_status: false,
+        disability_status: false
+    },
+    {
+        name: "Kishore Vaigyanik Protsahan Yojana (KVPY)",
+        provider: "Department of Science and Technology",
+        eligibility_criteria: "Students enrolled in XI Standard, XII Standard, or 1st year of UG courses in Basic Sciences. Aptitude Test + Interview.",
+        education_level: ["12th", "Undergraduate"],
+        category: ["General", "OBC", "SC", "ST"],
+        income_limit: 0,
+        marks_requirement: 60, // Math/Science aggregate
+        state: "All India",
+        description: "National Program of Fellowship in Basic Sciences to encourage students to take up research careers in Science.",
+        benefits: "Monthly fellowship of ₹5000 to ₹7000 + Annual contingency grant of ₹20000 to ₹28000.",
+        deadline: "2026-09-06T00:00:00Z", // Usually early September
+        required_documents: ["Marksheets", "Caste Certificate (if applicable)", "Passport Size Photo", "Signature"],
+        official_website: "http://kvpy.iisc.ernet.in/",
+        minority_status: false,
+        disability_status: false
+    }
+];
+
+const seedDB = async () => {
+    try {
+        console.log(`📡 Connecting to Supabase at ${supabaseUrl}`);
+
+        console.log("🧹 Clearing existing scholarships to prevent duplicates...");
+        // Delete all (empty filter)
+        await supabase.from("scholarships").delete().neq('id', '00000000-0000-0000-0000-000000000000');
+
+        console.log(`🌱 Supplying database with ${seedScholarships.length} pan-India national & state scholarships...`);
+        const { data, error } = await supabase.from("scholarships").insert(seedScholarships).select();
+
+        if (error) {
+            throw error;
+        }
+
+        console.log(`🎉 Success! Inserted ${data.length} scholarships into the database.`);
+
+        process.exit(0);
+    } catch (error) {
+        console.error("❌ Failed to seed database:", error);
+        process.exit(1);
+    }
+};
+
+seedDB();
