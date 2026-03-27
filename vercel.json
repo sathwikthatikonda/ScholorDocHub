@@ -1,4 +1,7 @@
 {
-  "framework": "nextjs",
-  "rootDirectory": "frontend"
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/frontend/src/app/api/$1" },
+    { "source": "/(.*)", "destination": "/frontend/$1" }
+  ]
 }
