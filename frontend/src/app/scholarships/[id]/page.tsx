@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useStore } from "@/store/useStore";
 import { api } from "@/lib/api";
 import { t, languageOptions } from "@/lib/i18n";
-import { ExternalLink, Volume2, CheckCircle, Calendar, GraduationCap, Building2, User, StopCircle, ArrowLeft, BriefcaseMedical, Landmark, BadgeAlert, FileCheck2, Info, CheckSquare, ShieldAlert, Copy, Link as LinkIcon, X, MapPin, Navigation, History, HelpCircle } from "lucide-react";
+import { ExternalLink, Volume2, CheckCircle, Calendar, GraduationCap, Building2, User, StopCircle, ArrowLeft, BriefcaseMedical, Landmark, BadgeAlert, FileCheck2, Info, CheckSquare, ShieldAlert, Copy, Link as LinkIcon, X, MapPin, Navigation, History, HelpCircle, Bookmark, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Guidance data for common documents
@@ -32,6 +32,17 @@ const docGuidance: Record<string, { steps: string[], centers: string[], mapQuery
         ],
         centers: ["CSC Centers", "Revenue Department Office", "MeeSeva", "Jan Seva Kendra"],
         mapQuery: "Caste Certificate application center"
+    },
+    "OBC Non-Creamy Layer Certificate": {
+        steps: [
+            "Apply online through E-District portal.",
+            "Submit caste certificate (OBC) and income proof.",
+            "Upload supporting documents.",
+            "Verification by Revenue Officer.",
+            "Download certificate after approval."
+        ],
+        centers: ["CSC Centers", "Revenue Department Office", "MeeSeva", "Jan Seva Kendra"],
+        mapQuery: "OBC Certificate center"
     },
     "Domicile Certificate": {
         steps: [
@@ -62,6 +73,173 @@ const docGuidance: Record<string, { steps: string[], centers: string[], mapQuery
         ],
         centers: ["Public Sector Banks", "Regional Rural Banks", "Post Office Banks"],
         mapQuery: "Nationalized Bank near me"
+    },
+    "Passport Size Photographs": {
+        steps: [
+            "Visit a photo studio or authorized center.",
+            "Request passport-size photos as per required dimensions.",
+            "Get printed copies (and soft copy if needed)."
+        ],
+        centers: ["Local Photo Studios", "CSC Centers (in some areas)"],
+        mapQuery: "Photo studio near me"
+    },
+    "Latest Marksheet / Transcripts": {
+        steps: [
+            "Request from school/college or download from board/university portal.",
+            "Verify details and obtain official stamp (if required).",
+            "Collect physical or digital copy."
+        ],
+        centers: ["School / College Office", "University/Board Office"],
+        mapQuery: "Education board office"
+    },
+    "Previous Year Marksheet": {
+        steps: [
+            "Obtain from school/college or download online.",
+            "Verify and keep a copy ready."
+        ],
+        centers: ["School / College Office", "Board/University Office"],
+        mapQuery: "School office"
+    },
+    "Minority Community Certificate": {
+        steps: [
+            "Apply online through the E-District portal of your state.",
+            "Fill in personal and community details in the application form.",
+            "Upload proof of minority status (religion certificate / self-declaration / supporting documents).",
+            "Attach identity and residence proof (Aadhaar, Voter ID, etc.).",
+            "Submit the application for verification by the Revenue Authority.",
+            "Verification by local officials may be conducted if required.",
+            "Final certificate can be downloaded online once approved."
+        ],
+        centers: ["CSC Centers", "Revenue Department Office", "MeeSeva", "Jan Seva Kendra"],
+        mapQuery: "Minority Certificate center"
+    },
+    "Labour ID Card / Certificate": {
+        steps: [
+            "Apply online through the Labour Department / Building & Other Construction Workers (BOCW) portal of your state.",
+            "Register as a worker by filling in personal and employment details.",
+            "Upload required documents (Aadhaar, age proof, bank details, employer/work proof).",
+            "Submit proof of working days (if required, e.g., 90 days certificate).",
+            "Pay the registration fee (if applicable).",
+            "Application is verified by the Labour Department अधिकारी.",
+            "Labour ID Card / Certificate is issued and can be downloaded after approval."
+        ],
+        centers: ["CSC Centers", "Labour Department Office", "MeeSeva", "Jan Seva Kendra"],
+        mapQuery: "Labour Department Office"
+    },
+    "Transfer Certificate (TC)": {
+        steps: [
+            "Submit a request/application to your current school or college.",
+            "Fill the TC request form with required details.",
+            "Clear all dues (fees, library books, etc.).",
+            "Provide identity details and admission information.",
+            "Institution verifies records and approves the request.",
+            "Collect the Transfer Certificate from the institution office or download (if available online)."
+        ],
+        centers: ["School Office", "College / University Office"],
+        mapQuery: "School office"
+    },
+    "Class 8 Marksheet": {
+        steps: [
+            "Request the marksheet from your school.",
+            "If available, download from the school/education board portal.",
+            "Verify all details (name, class, marks, etc.).",
+            "Get it signed/stamped by the school authority if required.",
+            "Collect the original or keep a verified copy for submission."
+        ],
+        centers: ["School Office", "Education Board Office (if applicable)"],
+        mapQuery: "School office"
+    },
+    "Signature": {
+        steps: [
+            "Sign clearly on a blank white paper using a black or blue pen.",
+            "Ensure the signature matches your official records.",
+            "Scan or take a clear photo of the signature.",
+            "Crop the image neatly (no background distractions).",
+            "Upload in the required format (JPG/PNG) and size as specified."
+        ],
+        centers: ["Self (can be done at home)", "CSC Centers (for scanning/upload help)", "Local Cyber Café"],
+        mapQuery: "Cyber cafe"
+    },
+    "Marksheet": {
+        steps: [
+            "Obtain the marksheet from your school/college.",
+            "If available, download it from the official board/university portal.",
+            "Verify all details (name, subjects, marks).",
+            "Get it attested/signed by the institution if required.",
+            "Keep a scanned copy ready for upload."
+        ],
+        centers: ["School / College Office", "University / Board Office", "CSC Centers (for print/scan support)"],
+        mapQuery: "Education board office"
+    },
+    "Service Certificate": {
+        steps: [
+            "Request a service certificate from your employer/organization.",
+            "Submit a formal application or request (if required).",
+            "Provide employee details (designation, duration, ID, etc.).",
+            "Employer verifies records and prepares the certificate.",
+            "Get the certificate signed and stamped by the authorized अधिकारी.",
+            "Collect the original or a scanned copy for submission."
+        ],
+        centers: ["Employer Office / Organization", "Government Department Office (for govt employees)"],
+        mapQuery: ""
+    },
+    "Bonafide Certificate": {
+        steps: [
+            "Submit a request/application to your school/college/institution.",
+            "Fill the bonafide request form with required details.",
+            "Provide ID/admission details.",
+            "Institution verifies your enrollment status.",
+            "Certificate is issued with signature and seal.",
+            "Collect the bonafide certificate from the office."
+        ],
+        centers: ["School Office", "College / University Office"],
+        mapQuery: "School office"
+    },
+    "Marksheet of Qualifying Exam": {
+        steps: [
+            "Obtain the marksheet from your school/college/university.",
+            "If available, download from the official board/university portal.",
+            "Verify all details (name, subjects, marks, result status).",
+            "Get it attested/signed if required.",
+            "Keep a scanned copy ready for upload."
+        ],
+        centers: ["School / College Office", "University / Board Office", "CSC Centers (for scanning/printing support)"],
+        mapQuery: "University office"
+    },
+    "Covid-19 Death Certificate of Parents (if applicable)": {
+        steps: [
+            "Visit official portal: Go to your state/municipal birth & death registration website.",
+            "Register / Login: Create an account or log in with your credentials.",
+            "Search for record: Enter details like Parent's name, Date of death, and Place of death.",
+            "Apply for certificate: Select the correct record and request a certified copy.",
+            "Upload supporting documents (if required): ID proof and Relationship proof (birth certificate, Aadhaar, etc.).",
+            "Pay fees: Make online payment (if applicable).",
+            "Download certificate: Once approved, download or receive it via email."
+        ],
+        centers: ["State Birth/Death Portal", "Municipal Corporation Office", "CSC Centers"],
+        mapQuery: "Birth and Death registration office"
+    },
+    "Orphan Certificate": {
+        steps: [
+            "Visit local authority office/portal: Typically issued by Tehsildar / Revenue Office or District Magistrate office.",
+            "Fill application form: Either online or offline.",
+            "Attach required documents: Parents' death certificates, Aadhaar card, Residence proof, and Affidavit (if required).",
+            "Submit application: Submit online or at the office.",
+            "Verification process: अधिकारी (officials) may conduct background verification.",
+            "Approval & issuance: Certificate will be issued after verification."
+        ],
+        centers: ["Tehsildar Office", "Revenue Office", "District Magistrate Office", "CSC Centers"],
+        mapQuery: "Tehsildar Office"
+    },
+    "Admission Proof": {
+        steps: [
+            "Contact your institution: Go to your school/college admin office or portal.",
+            "Request admission proof document: This may be an Admission letter, Bonafide certificate, or Fee receipt.",
+            "Provide student details: Name, Roll number / Application ID.",
+            "Download or collect document: Download from portal OR Collect signed copy from office."
+        ],
+        centers: ["School Office", "College Admin Office", "University Registrar"],
+        mapQuery: "School or College Office"
     }
 };
 
@@ -78,13 +256,16 @@ const defaultGuidance = {
 export default function ScholarshipDetails() {
     const params = useParams();
     const router = useRouter();
-    const { language, token } = useStore();
     const [scholarship, setScholarship] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [isSpeaking, setIsSpeaking] = useState(false);
+    const [isSaved, setIsSaved] = useState(false);
+    const [saving, setSaving] = useState(false);
     const [checkedDocs, setCheckedDocs] = useState<Record<number, boolean>>({});
     const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
     const [userLocation, setUserLocation] = useState<{ lat: number, lng: number } | null>(null);
+
+    const { user, setUser, language, token } = useStore();
 
     useEffect(() => {
         if (!token) {
@@ -96,6 +277,11 @@ export default function ScholarshipDetails() {
             try {
                 const res = await api.get(`/scholarships/${params.id}`);
                 setScholarship(res.data);
+
+                // Check if already saved
+                if (user?.savedScholarships?.includes(String(params.id))) {
+                    setIsSaved(true);
+                }
             } catch (err) {
                 console.error("Failed to fetch scholarship:", err);
             } finally {
@@ -115,7 +301,31 @@ export default function ScholarshipDetails() {
         return () => {
             window.speechSynthesis.cancel();
         };
-    }, [params.id, token, router]);
+    }, [params.id, token, router, user?.savedScholarships]);
+
+    const [showSuccess, setShowSuccess] = useState(false);
+
+    const handleSave = async () => {
+        if (saving) return;
+        setSaving(true);
+        try {
+            if (isSaved) {
+                const res = await api.delete(`/users/save-scholarship/${params.id}`);
+                setUser({ ...user, savedScholarships: res.data.savedScholarships });
+                setIsSaved(false);
+            } else {
+                const res = await api.post(`/users/save-scholarship/${params.id}`);
+                setUser({ ...user, savedScholarships: res.data.savedScholarships });
+                setIsSaved(true);
+                setShowSuccess(true);
+                setTimeout(() => setShowSuccess(false), 3000);
+            }
+        } catch (err) {
+            console.error("Failed to save scholarship:", err);
+        } finally {
+            setSaving(false);
+        }
+    };
 
     const toggleSpeech = () => {
         if (isSpeaking) {
@@ -207,17 +417,7 @@ export default function ScholarshipDetails() {
                             </div>
                         </div>
 
-                        <button
-                            onClick={toggleSpeech}
-                            className={`flex-shrink-0 flex items-center justify-center gap-3 px-6 py-4 rounded-xl border font-bold text-sm shadow-xl transition-all ${isSpeaking ? 'bg-red-500/10 text-red-400 border-red-500/30 hover:bg-red-500/20 shadow-red-500/10' : 'bg-primary-800 text-white border-primary-700 hover:bg-primary-700 shadow-primary-900'}`}
-                            title="Listen to details via AI Voice"
-                        >
-                            {isSpeaking ? (
-                                <><StopCircle className="w-5 h-5 animate-pulse" /> Stop Narration</>
-                            ) : (
-                                <><Volume2 className="w-5 h-5 text-accent-teal-400" /> {t("ReadAloud", language)}</>
-                            )}
-                        </button>
+
                     </div>
                 </div>
             </div>
@@ -317,8 +517,9 @@ export default function ScholarshipDetails() {
                                             </div>
 
                                             <button
-                                                onClick={() => setSelectedDoc(doc)}
-                                                className={`mt-auto flex items-center justify-center gap-2 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${checkedDocs[idx] ? 'bg-green-100 text-green-700 hover:bg-green-200' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}
+                                                onClick={() => !checkedDocs[idx] && setSelectedDoc(doc)}
+                                                disabled={checkedDocs[idx]}
+                                                className={`mt-auto flex items-center justify-center gap-2 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${checkedDocs[idx] ? 'bg-green-100 text-green-700 opacity-50 cursor-not-allowed' : 'bg-slate-100 text-slate-500 hover:bg-slate-200 cursor-pointer'}`}
                                             >
                                                 <HelpCircle className="w-3 h-3" /> How to Apply
                                             </button>
@@ -352,10 +553,39 @@ export default function ScholarshipDetails() {
                                     className="group flex flex-col items-center justify-center p-4 bg-primary-700 hover:bg-primary-800 text-white font-bold rounded-xl shadow-lg shadow-primary-500/20 transition-all hover:-translate-y-1 w-full text-center border-b-[4px] border-primary-900 active:border-b-0 active:translate-y-1"
                                 >
                                     <span className="flex items-center gap-2 text-lg mb-1">
-                                        <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform" /> {t("ConnectApply", language)}
+                                        <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform" /> {scholarship.officialWebsite?.includes('scholarships.gov.in') ? "Apply on NSP" : t("ConnectApply", language)}
                                     </span>
                                     <span className="text-[10px] text-primary-200 uppercase tracking-widest font-semibold flex items-center">{t("RedirectLabel", language)}</span>
                                 </a>
+
+                                <AnimatePresence>
+                                    {showSuccess && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.9 }}
+                                            className="bg-green-600 text-white text-[11px] font-bold py-2 px-4 rounded-lg text-center shadow-lg"
+                                        >
+                                            Adding to Saved Applications...
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
+                                <button
+                                    onClick={handleSave}
+                                    disabled={saving}
+                                    className={`w-full py-4 px-6 rounded-xl font-bold flex items-center justify-center gap-3 transition-all border-2 ${isSaved
+                                        ? "bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
+                                        : "bg-white border-slate-200 text-slate-700 hover:border-primary-300 hover:bg-slate-50"
+                                        }`}
+                                >
+                                    {saving ? (
+                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                    ) : (
+                                        <CheckCircle className={`w-5 h-5 ${isSaved ? 'fill-green-600' : ''}`} />
+                                    )}
+                                    {isSaved ? "Marked as Applied" : "Mark as Applied"}
+                                </button>
 
                                 <Link href="/dashboard" className="premium-button-secondary w-full">
                                     {t("ReturnToMatches", language)}
@@ -430,20 +660,28 @@ export default function ScholarshipDetails() {
                                         </div>
                                     </div>
 
-                                    <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                                        <h4 className="text-primary-950 font-black uppercase text-xs tracking-widest mb-4 flex items-center gap-2">
-                                            <MapPin className="w-4 h-4 text-red-500" /> Nearby Proximity search
-                                        </h4>
-                                        <p className="text-[11px] text-slate-500 font-bold mb-4">Find authorized centers near your current location for immediate application.</p>
-                                        <a
-                                            href={`https://www.google.com/maps/search/${encodeURIComponent(currentDocInfo.mapQuery)}${userLocation ? `+near+${userLocation.lat},${userLocation.lng}` : '+near+me'}`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="w-full py-3 bg-white hover:bg-primary-50 text-primary-700 border-2 border-primary-200 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 shadow-sm hover:shadow-md"
-                                        >
-                                            <Navigation className="w-4 h-4" /> Launch Live Map Search
-                                        </a>
-                                    </div>
+                                    {!(selectedDoc?.toLowerCase().includes("marksheet") || 
+                                       selectedDoc?.toLowerCase().includes("transcript") || 
+                                       selectedDoc === "Bonafide Certificate" || 
+                                       selectedDoc === "Service Certificate" || 
+                                       selectedDoc === "Signature" || 
+                                       selectedDoc?.includes("Admission Proof") || 
+                                       selectedDoc?.includes("Transfer Certificate")) && (
+                                        <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                                            <h4 className="text-primary-950 font-black uppercase text-xs tracking-widest mb-4 flex items-center gap-2">
+                                                <MapPin className="w-4 h-4 text-red-500" /> Nearby Proximity search
+                                            </h4>
+                                            <p className="text-[11px] text-slate-500 font-bold mb-4">Find authorized centers near your current location for immediate application.</p>
+                                            <a
+                                                href={`https://www.google.com/maps/search/${encodeURIComponent(currentDocInfo.mapQuery)}${userLocation ? `+near+${userLocation.lat},${userLocation.lng}` : '+near+me'}`}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="w-full py-3 bg-white hover:bg-primary-50 text-primary-700 border-2 border-primary-200 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 shadow-sm hover:shadow-md"
+                                            >
+                                                <Navigation className="w-4 h-4" /> Launch Live Map Search
+                                            </a>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 

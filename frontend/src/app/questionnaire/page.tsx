@@ -129,7 +129,7 @@ export default function Questionnaire() {
                                             <OptionCard label="Diploma" value="Diploma" current={profile.educationLevel} field="educationLevel" />
                                             <OptionCard label="Undergraduate" value="Undergraduate" current={profile.educationLevel} field="educationLevel" />
                                             <OptionCard label="Postgraduate" value="Postgraduate" current={profile.educationLevel} field="educationLevel" />
-                                            <OptionCard label="PhD" value="PhD" current={profile.educationLevel} field="educationLevel" />
+                                            <OptionCard label="Other" value="PhD" current={profile.educationLevel} field="educationLevel" />
                                         </div>
                                     </div>
                                     <div className="grid md:grid-cols-2 gap-6 pt-8 border-t border-slate-100">
@@ -188,7 +188,7 @@ export default function Questionnaire() {
                                 <div className="space-y-8 max-w-2xl mx-auto">
                                     <div>
                                         <h3 className="text-2xl font-black text-slate-900 mb-2">{t("FinancialVerification", language)}</h3>
-                                        <p className="text-slate-500 mb-6 font-medium text-sm leading-relaxed">{t("FinancialVerificationDesc", language)}</p>
+
 
                                         <label className="premium-label text-base font-bold">{t("AnnualIncome", language)} <span className="text-red-500">*</span></label>
                                         <div className="relative">
@@ -207,12 +207,33 @@ export default function Questionnaire() {
                                         >
                                             <option value="" disabled>Select Domicile State</option>
                                             <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                            <option value="Telangana">Telangana</option>
+                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jharkhand">Jharkhand</option>
                                             <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
                                             <option value="Maharashtra">Maharashtra</option>
-                                            <option value="Delhi">Delhi</option>
-                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
                                             <option value="Tamil Nadu">Tamil Nadu</option>
+                                            <option value="Telangana">Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="West Bengal">West Bengal</option>
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
@@ -233,9 +254,7 @@ export default function Questionnaire() {
                                         <CheckCircle2 className="w-14 h-14 text-green-500" />
                                     </div>
                                     <h3 className="text-4xl font-black text-slate-900 mb-3 tracking-tighter">{t("ReadyVerification", language)}</h3>
-                                    <p className="text-slate-600 text-lg max-w-xl mx-auto leading-relaxed font-medium">
-                                        {t("ReadyVerificationDesc", language)}
-                                    </p>
+
                                 </div>
                             )}
                         </div>

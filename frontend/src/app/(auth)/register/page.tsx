@@ -104,7 +104,7 @@ export default function Register() {
                         </div>
                         <div className="flex items-center gap-4 mb-3">
                             <div className="w-10 h-10 bg-primary-100 text-primary-700 rounded-full flex items-center justify-center font-bold">2</div>
-                            <p className="font-semibold text-slate-800">Complete KYC Profile</p>
+                            <p className="font-semibold text-slate-800">Complete Profile</p>
                         </div>
                         <div className="flex items-center gap-4">
                             <div className="w-10 h-10 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center font-bold">3</div>
@@ -202,14 +202,7 @@ export default function Register() {
                                     <option value="Uttar Pradesh">Uttar Pradesh</option>
                                     <option value="Uttarakhand">Uttarakhand</option>
                                     <option value="West Bengal">West Bengal</option>
-                                    <option value="Delhi">Delhi (NCT)</option>
-                                    <option value="Jammu and Kashmir">Jammu & Kashmir</option>
-                                    <option value="Ladakh">Ladakh</option>
-                                    <option value="Chandigarh">Chandigarh</option>
-                                    <option value="Puducherry">Puducherry</option>
-                                    <option value="Andaman and Nicobar Islands">Andaman & Nicobar Islands</option>
-                                    <option value="Lakshadweep">Lakshadweep</option>
-                                    <option value="Dadra and Nagar Haveli">Dadra & Nagar Haveli</option>
+                                    <option value="Other">Other</option>
                                 </select>
                             </div>
                         </div>

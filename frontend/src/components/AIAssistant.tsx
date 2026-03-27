@@ -99,7 +99,7 @@ export default function AIAssistant() {
 
         try {
             const selectedLangName = languagesList.find((l) => l.code === language)?.name || "English";
-            const response = await fetch("http://localhost:5000/api/ai/chat", {
+            const response = await fetch("/api/ai/chat", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -158,7 +158,7 @@ export default function AIAssistant() {
                                     <Mic className="w-5 h-5 text-white" />
                                 </div>
                                 <div>
-                                    <h3 className="font-bold text-lg leading-tight">Swayam AI</h3>
+                                    <h3 className="font-bold text-lg leading-tight">Swayam Assistant</h3>
                                     <p className="text-xs text-blue-100 font-medium">Multilingual Voice Assistant</p>
                                 </div>
                             </div>

@@ -24,7 +24,7 @@ export default function Login() {
             const res = await api.post("/auth/login", { email, password });
             setToken(res.data.token);
             setUser(res.data);
-            router.push("/questionnaire");
+            router.push("/dashboard");
         } catch (err: any) {
             setError(err.response?.data?.message || "Login failed");
         } finally {
@@ -84,7 +84,7 @@ export default function Login() {
                             />
                         </div>
 
-                        <button type="submit" disabled={loading} className="w-full premium-button-primary mt-8 py-3.5 text-base">
+                        <button type="submit" disabled={loading} className="w-full premium-button-primary mt-8 py-3.5 text-base shadow-lg shadow-primary-500/20">
                             {loading ? (
                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                             ) : (

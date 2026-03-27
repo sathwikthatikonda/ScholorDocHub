@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
             state: data.user.user_metadata?.state,
             mobileNumber: data.user.user_metadata?.mobile_number,
             profile: data.user.user_metadata?.profile || {},
+            savedScholarships: data.user.user_metadata?.saved_scholarships || [],
             token: data.session.access_token
         });
     } catch (error) {

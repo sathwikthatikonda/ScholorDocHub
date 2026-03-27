@@ -68,7 +68,8 @@ export async function PUT(req: NextRequest) {
             email: data.user?.email,
             role: data.user?.user_metadata?.role || 'user',
             state: data.user?.user_metadata?.state,
-            profile: data.user?.user_metadata?.profile || {}
+            profile: data.user?.user_metadata?.profile || {},
+            savedScholarships: data.user?.user_metadata?.saved_scholarships || []
         });
     } catch (error) {
         return NextResponse.json({ message: 'Server error' }, { status: 500 });

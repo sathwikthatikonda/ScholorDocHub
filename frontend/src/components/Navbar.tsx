@@ -55,21 +55,18 @@ export default function Navbar() {
                         <div className="hidden md:flex items-center gap-8 font-medium text-slate-600">
                             <Link href="/" className={`${pathname === '/' ? 'text-primary-700 font-semibold' : 'hover:text-primary-700'} transition-colors`}>Home</Link>
                             <Link href="/dashboard" className={`${pathname === '/dashboard' ? 'text-primary-700 font-semibold' : 'hover:text-primary-700'} transition-colors`}>Scholarships</Link>
+                            <Link href="/how-it-works" className={`${pathname === '/how-it-works' ? 'text-primary-700 font-semibold' : 'hover:text-primary-700'} transition-colors`}>How It Works</Link>
                             <Link
                                 href="/about"
                                 className={`${pathname === '/about' ? 'text-primary-700 font-bold bg-primary-50' : 'hover:text-primary-700 bg-slate-100'} transition-colors uppercase text-[11px] tracking-widest font-bold px-3 py-1 rounded-full`}
                             >
-                                About Us
+                                About
                             </Link>
                         </div>
 
                         <div className="flex items-center gap-4">
                             {user ? (
                                 <div className="flex items-center gap-4">
-                                    <Link href="/dashboard" className="text-slate-600 hover:text-primary-700 font-medium transition-colors flex items-center gap-2">
-                                        <User className="w-5 h-5" />
-                                        <span className="hidden sm:inline">My Dashboard</span>
-                                    </Link>
                                     {user.role === "admin" && (
                                         <Link href="/admin" className="text-accent-gold-600 hover:text-accent-gold-500 font-semibold transition-colors">
                                             Admin Panel

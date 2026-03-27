@@ -36,14 +36,14 @@ export default function HelpChatBot() {
         setIsLoading(true);
 
         try {
-            const res = await fetch("/api/chat", {
+            const response = await fetch("/api/ai/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: userMessage.content }),
+                body: JSON.stringify({ text: userMessage.content, lang: "English" }),
             });
 
-            if (!res.ok) throw new Error("Failed to fetch response");
-            const data = await res.json();
+            if (!response.ok) throw new Error("Failed to fetch response");
+            const data = await response.json();
 
             setMessages((prev) => [...prev, { id: (Date.now() + 1).toString(), role: "assistant", content: data.reply }]);
         } catch (error) {

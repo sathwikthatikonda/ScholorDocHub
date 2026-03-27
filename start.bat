@@ -7,4 +7,4 @@ start cmd /k "cd backend && npm run dev"
 echo Starting Frontend...
 start cmd /k "cd frontend && npm run dev"
 
-echo App is starting. Navigate to http://localhost:3000
+echo App is starting. Navigate to http://localhost:3000 

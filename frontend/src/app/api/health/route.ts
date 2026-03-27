@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-    return NextResponse.json({ status: 'ok', message: 'ScholarDoc Hub API running on Vercel 🚀' });
+    return NextResponse.json({
+        status: 'ok',
+        message: 'ScholarDoc Hub API running on Vercel 🚀',
+        timestamp: new Date().toISOString(),
+    });
 }
