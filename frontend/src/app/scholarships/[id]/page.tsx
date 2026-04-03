@@ -11,16 +11,29 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Guidance data for common documents
 const docGuidance: Record<string, { steps: string[], centers: string[], mapQuery: string }> = {
-    "Income Certificate": {
+    "Income Proof": {
         steps: [
-            "Visit the official State E-District portal OR go to your nearest CSC center.",
-            "Submit Form No. 16/A and self-declaration of income.",
-            "Attach Aadhaar Card, Ration Card, and Salary Slips (if applicable).",
-            "Get verification done by the Village Revenue Officer (VRO) or Tahsildar.",
-            "Certificate is usually issued within 7-15 working days."
+            "Salaried: Upload salary slips / bank statement / Form 16",
+            "Self-employed: Upload ITR or CA certificate",
+            "No proof:",
+            "  1. Apply for income certificate (online or local office)",
+            "  2. Submit ID + address proof",
+            "  3. Download certificate"
         ],
-        centers: ["Common Service Centres (CSC)", "Tahsildar Office", "E-Mitra (Rajasthan)", "MeeSeva (AP/Telangana)"],
+        centers: ["CSC Centers", "Tahsildar Office", "E-Mitra (Rajasthan)", "MeeSeva (AP/Telangana)"],
         mapQuery: "Income Certificate application center"
+    },
+    "Aptitude Test Score": {
+        steps: [
+            "Already have score: Download scorecard -> Upload",
+            "Don't have score:",
+            "  1. Register for approved test",
+            "  2. Take test",
+            "  3. Download result",
+            "  4. Upload scorecard"
+        ],
+        centers: ["NTA Test Centers", "Authorized Test Portals", "School/College Board"],
+        mapQuery: "Aptitude test center"
     },
     "Caste Certificate": {
         steps: [
@@ -624,7 +637,9 @@ export default function ScholarshipDetails() {
                                     </div>
                                     <div>
                                         <h3 className="text-2xl font-black">{selectedDoc}</h3>
-                                        <p className="text-primary-300 text-xs font-bold uppercase tracking-[0.2em] mt-1">Application Guidance</p>
+                                        <p className="text-primary-300 text-xs font-bold uppercase tracking-[0.2em] mt-1">
+                                            {(selectedDoc?.toLowerCase().includes("income") || selectedDoc?.toLowerCase().includes("aptitude")) ? "Quick Steps" : "Application Guidance"}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -632,17 +647,31 @@ export default function ScholarshipDetails() {
                             <div className="p-8 max-h-[70vh] overflow-y-auto custom-scrollbar">
                                 <div className="mb-10">
                                     <h4 className="flex items-center gap-2 text-primary-950 font-black uppercase text-xs tracking-widest mb-6 border-l-4 border-accent-gold-500 pl-3">
-                                        <History className="w-4 h-4" /> Steps to Apply
+                                        <History className="w-4 h-4" /> 
+                                        {(selectedDoc?.toLowerCase().includes("income") || selectedDoc?.toLowerCase().includes("aptitude")) ? "Quick Steps to Apply" : "Steps to Apply"}
                                     </h4>
-                                    <div className="space-y-6">
-                                        {currentDocInfo.steps.map((step, i) => (
-                                            <div key={i} className="flex gap-4 group">
-                                                <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 text-xs font-black text-primary-700 border border-slate-200 group-hover:bg-primary-700 group-hover:text-white transition-colors">
-                                                    {i + 1}
+                                    <div className="space-y-4">
+                                        {currentDocInfo.steps.map((step, i) => {
+                                            const isNested = step.startsWith("  ");
+                                            const hasBullet = step.includes(": ") && !isNested;
+                                            
+                                            return (
+                                                <div key={i} className={`flex gap-4 group ${isNested ? "ml-12" : ""}`}>
+                                                    {!isNested ? (
+                                                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 text-xs font-black text-primary-700 border border-slate-200 group-hover:bg-primary-700 group-hover:text-white transition-colors">
+                                                            {i + 1}
+                                                        </div>
+                                                    ) : (
+                                                        <div className="w-8 h-8 flex items-center justify-center shrink-0">
+                                                            <div className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+                                                        </div>
+                                                    )}
+                                                    <p className={`text-slate-600 text-sm font-medium leading-relaxed pt-1 ${hasBullet ? "font-bold" : ""}`}>
+                                                        {step.trim()}
+                                                    </p>
                                                 </div>
-                                                <p className="text-slate-600 text-sm font-medium leading-relaxed pt-1">{step}</p>
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 </div>
 
@@ -662,6 +691,7 @@ export default function ScholarshipDetails() {
 
                                     {!(selectedDoc?.toLowerCase().includes("marksheet") || 
                                        selectedDoc?.toLowerCase().includes("transcript") || 
+                                       selectedDoc?.toLowerCase().includes("aptitude") || 
                                        selectedDoc === "Bonafide Certificate" || 
                                        selectedDoc === "Service Certificate" || 
                                        selectedDoc === "Signature" || 

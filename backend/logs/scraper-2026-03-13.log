@@ -1,0 +1,307 @@
+[2026-03-13T16:43:47.664Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T16:44:04.110Z] [INFO] [CLI] Running scraper manually via CLI...
+[2026-03-13T16:44:04.111Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T16:44:04.111Z] [INFO] [PIPELINE]   ScholarDoc Hub — Scholarship Scraping Pipeline
+[2026-03-13T16:44:04.111Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T16:44:04.132Z] [INFO] [PIPELINE] Started at 13/3/2026, 10:14:04 pm
+[2026-03-13T16:44:04.133Z] [INFO] [PIPELINE] Step 1/3: Running scrapers from all sources...
+[2026-03-13T16:44:04.133Z] [INFO] [NSP] Starting scrape from NSP...
+[2026-03-13T16:44:04.134Z] [INFO] [NSP] Attempting live page fetch from scholarships.gov.in...
+[2026-03-13T16:44:04.591Z] [INFO] [NSP] Live page fetched successfully (107383 bytes)
+[2026-03-13T16:44:04.594Z] [SUCCESS] [NSP] Scraped 19 scholarships in 0.5s
+[2026-03-13T16:44:04.594Z] [INFO] [UGC] Starting scrape from UGC...
+[2026-03-13T16:44:04.594Z] [SUCCESS] [UGC] Scraped 6 scholarships in 0.0s
+[2026-03-13T16:44:04.595Z] [INFO] [AICTE] Starting scrape from AICTE...
+[2026-03-13T16:44:04.595Z] [SUCCESS] [AICTE] Scraped 6 scholarships in 0.0s
+[2026-03-13T16:44:04.595Z] [INFO] [STATE_PORTALS] Starting scrape from STATE_PORTALS...
+[2026-03-13T16:44:04.596Z] [SUCCESS] [STATE_PORTALS] Scraped 16 scholarships in 0.0s
+[2026-03-13T16:44:04.596Z] [INFO] [PRIVATE] Starting scrape from PRIVATE...
+[2026-03-13T16:44:04.596Z] [SUCCESS] [PRIVATE] Scraped 12 scholarships in 0.0s
+[2026-03-13T16:44:04.596Z] [INFO] [PIPELINE] Step 1 complete: Scraped 59 scholarships from 5 sources
+[2026-03-13T16:44:04.597Z] [INFO] [PIPELINE] Step 2/3: Deduplicating scholarships...
+[2026-03-13T16:44:04.597Z] [INFO] [PIPELINE] Step 2 complete: 59 unique scholarships (removed 0 duplicates)
+[2026-03-13T16:44:04.597Z] [INFO] [PIPELINE] Step 3/3: Upserting to Supabase...
+[2026-03-13T16:44:05.639Z] [ERROR] [SUPABASE] Insert error for "Pre-Matric Scholarship Scheme for Minorities": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:05.955Z] [ERROR] [SUPABASE] Insert error for "Post-Matric Scholarship Scheme for Minorities": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:06.275Z] [ERROR] [SUPABASE] Insert error for "Merit Cum Means Scholarship for Professional and Technical Courses CS": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:06.604Z] [ERROR] [SUPABASE] Insert error for "Pre-Matric Scholarship for Students with Disabilities": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:06.924Z] [ERROR] [SUPABASE] Insert error for "Post-Matric Scholarship for Students with Disabilities": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:07.240Z] [ERROR] [SUPABASE] Insert error for "Scholarships for Top Class Education for Students with Disabilities": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:07.547Z] [ERROR] [SUPABASE] Insert error for "National Fellowship and Scholarship for Higher Education of ST Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:07.874Z] [ERROR] [SUPABASE] Insert error for "Central Sector Scheme of Scholarships for College and University Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:08.199Z] [ERROR] [SUPABASE] Insert error for "Pre-Matric Scholarship for SC Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:08.530Z] [ERROR] [SUPABASE] Insert error for "Post-Matric Scholarship for SC Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:08.865Z] [ERROR] [SUPABASE] Insert error for "Top Class Education Scheme for SC Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:09.189Z] [ERROR] [SUPABASE] Insert error for "Pre-Matric Scholarship for OBC Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:09.499Z] [ERROR] [SUPABASE] Insert error for "Post-Matric Scholarship for OBC Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:09.799Z] [ERROR] [SUPABASE] Insert error for "Dr. Ambedkar Post-Matric Scholarship for EBC Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:10.100Z] [ERROR] [SUPABASE] Insert error for "National Means Cum Merit Scholarship (NMMS)": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:10.408Z] [ERROR] [SUPABASE] Insert error for "Prime Minister's Scholarship Scheme For RPF/RPSF": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:10.709Z] [ERROR] [SUPABASE] Insert error for "Prime Minister's Scholarship Scheme for Central Armed Police Forces & Assam Rifles": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:11.026Z] [ERROR] [SUPABASE] Insert error for "Financial Assistance for Education to the Wards of Beedi/Cine/IOMC/LSDM Workers - Pre-Matric": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:11.332Z] [ERROR] [SUPABASE] Insert error for "Financial Assistance for Education to the Wards of Beedi/Cine/IOMC/LSDM Workers - Post-Matric": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:11.644Z] [ERROR] [SUPABASE] Insert error for "PG Indira Gandhi Scholarship for Single Girl Child": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:11.956Z] [ERROR] [SUPABASE] Insert error for "PG Scholarship for University Rank Holders": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:12.258Z] [ERROR] [SUPABASE] Insert error for "Ishan Uday Scholarship for North-Eastern Region": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:12.569Z] [ERROR] [SUPABASE] Insert error for "NET JRF Fellowship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:12.871Z] [ERROR] [SUPABASE] Insert error for "Rajiv Gandhi National Fellowship for SC Candidates": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:13.175Z] [ERROR] [SUPABASE] Insert error for "Maulana Azad National Fellowship for Minority Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:13.495Z] [ERROR] [SUPABASE] Insert error for "AICTE Pragati Scholarship for Girls": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:13.800Z] [ERROR] [SUPABASE] Insert error for "AICTE Saksham Scholarship Scheme for Specially Abled Student": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:14.098Z] [ERROR] [SUPABASE] Insert error for "Swanath Scholarship Scheme (Technical Degree)": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:14.396Z] [ERROR] [SUPABASE] Insert error for "Pragati Scholarship Scheme For Technical Education": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:14.694Z] [ERROR] [SUPABASE] Insert error for "AICTE PG Scholarship for GATE/GPAT Qualified Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:14.996Z] [ERROR] [SUPABASE] Insert error for "AICTE Doctoral Fellowship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:15.290Z] [ERROR] [SUPABASE] Insert error for "Mukhyamantri Medhavi Vidyarthi Yojana": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:15.598Z] [ERROR] [SUPABASE] Insert error for "MahaDBT Post Matric Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:15.895Z] [ERROR] [SUPABASE] Insert error for "Swami Vivekananda Merit Cum Means Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:16.197Z] [ERROR] [SUPABASE] Insert error for "Dr. YSR Vidyadheevena Scheme": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:16.509Z] [ERROR] [SUPABASE] Insert error for "Chief Minister's Scholarship Scheme for Higher Education": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:16.811Z] [ERROR] [SUPABASE] Insert error for "NSP Pre Matric Scholarship for SC Students, Karnataka": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:17.113Z] [ERROR] [SUPABASE] Insert error for "NEC Merit Scholarship (North Eastern Council)": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:17.410Z] [ERROR] [SUPABASE] Insert error for "Telangana State Overseas Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:17.716Z] [ERROR] [SUPABASE] Insert error for "Tamil Nadu Chief Minister's Higher Education Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:18.022Z] [ERROR] [SUPABASE] Insert error for "E-Kalyan Bihar State Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:18.320Z] [ERROR] [SUPABASE] Insert error for "Oasis Scholarship, West Bengal Minority": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:18.619Z] [ERROR] [SUPABASE] Insert error for "Uttar Pradesh Post-Matric Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:19.173Z] [ERROR] [SUPABASE] Insert error for "Rajasthan Ambedkar DBT Voucher Yojana": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:19.509Z] [ERROR] [SUPABASE] Insert error for "Kerala State Merit Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:19.824Z] [ERROR] [SUPABASE] Insert error for "Punjab Merit Cum Means Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:20.124Z] [ERROR] [SUPABASE] Insert error for "Gujarat State Scholarship for SC/ST Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:20.493Z] [ERROR] [SUPABASE] Insert error for "Vidyadhan Scholarship Program": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:20.793Z] [ERROR] [SUPABASE] Insert error for "Reliance Foundation Undergraduate Scholarships": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:21.091Z] [ERROR] [SUPABASE] Insert error for "HDFC Badhte Kadam Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:21.391Z] [ERROR] [SUPABASE] Insert error for "Keep India Smiling Foundational Scholarship Programme": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:21.689Z] [ERROR] [SUPABASE] Insert error for "Tata Scholarship for Cornell University": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:21.983Z] [ERROR] [SUPABASE] Insert error for "Inspire Scholarship for Higher Education (SHE)": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:22.281Z] [ERROR] [SUPABASE] Insert error for "Dr. APJ Abdul Kalam Ignite Awards": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:22.579Z] [ERROR] [SUPABASE] Insert error for "Kishore Vaigyanik Protsahan Yojana (KVPY)": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:22.880Z] [ERROR] [SUPABASE] Insert error for "Prime Minister's Research Fellowship (PMRF)": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:23.187Z] [ERROR] [SUPABASE] Insert error for "National Overseas Scholarship for ST Students": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:23.498Z] [ERROR] [SUPABASE] Insert error for "Wipro Education Fellowship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:23.805Z] [ERROR] [SUPABASE] Insert error for "Azim Premji University Scholarship": Could not find the 'application_link' column of 'scholarships' in the schema cache 
+[2026-03-13T16:44:23.806Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T16:44:23.807Z] [SUCCESS] [PIPELINE] Pipeline complete in 19.7s
+[2026-03-13T16:44:23.807Z] [INFO] [PIPELINE]   📥 Scraped: 59 total, 59 unique
+[2026-03-13T16:44:23.808Z] [INFO] [PIPELINE]   ✅ Inserted: 0 new scholarships
+[2026-03-13T16:44:23.808Z] [INFO] [PIPELINE]   🔄 Updated: 0 existing scholarships
+[2026-03-13T16:44:23.809Z] [WARN] [PIPELINE]   ❌ Errors: 59 
+[2026-03-13T16:44:23.809Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T16:44:48.382Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T16:45:20.660Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T16:45:31.718Z] [INFO] [CLI] Running scraper manually via CLI...
+[2026-03-13T16:45:31.719Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T16:45:31.719Z] [INFO] [PIPELINE]   ScholarDoc Hub — Scholarship Scraping Pipeline
+[2026-03-13T16:45:31.720Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T16:45:31.734Z] [INFO] [PIPELINE] Started at 13/3/2026, 10:15:31 pm
+[2026-03-13T16:45:31.734Z] [INFO] [PIPELINE] Step 1/3: Running scrapers from all sources...
+[2026-03-13T16:45:31.735Z] [INFO] [NSP] Starting scrape from NSP...
+[2026-03-13T16:45:31.735Z] [INFO] [NSP] Attempting live page fetch from scholarships.gov.in...
+[2026-03-13T16:45:32.134Z] [INFO] [NSP] Live page fetched successfully (107383 bytes)
+[2026-03-13T16:45:32.138Z] [SUCCESS] [NSP] Scraped 19 scholarships in 0.4s
+[2026-03-13T16:45:32.138Z] [INFO] [UGC] Starting scrape from UGC...
+[2026-03-13T16:45:32.139Z] [SUCCESS] [UGC] Scraped 6 scholarships in 0.0s
+[2026-03-13T16:45:32.140Z] [INFO] [AICTE] Starting scrape from AICTE...
+[2026-03-13T16:45:32.140Z] [SUCCESS] [AICTE] Scraped 6 scholarships in 0.0s
+[2026-03-13T16:45:32.141Z] [INFO] [STATE_PORTALS] Starting scrape from STATE_PORTALS...
+[2026-03-13T16:45:32.142Z] [SUCCESS] [STATE_PORTALS] Scraped 16 scholarships in 0.0s
+[2026-03-13T16:45:32.142Z] [INFO] [PRIVATE] Starting scrape from PRIVATE...
+[2026-03-13T16:45:32.143Z] [SUCCESS] [PRIVATE] Scraped 12 scholarships in 0.0s
+[2026-03-13T16:45:32.143Z] [INFO] [PIPELINE] Step 1 complete: Scraped 59 scholarships from 5 sources
+[2026-03-13T16:45:32.143Z] [INFO] [PIPELINE] Step 2/3: Deduplicating scholarships...
+[2026-03-13T16:45:32.144Z] [INFO] [PIPELINE] Step 2 complete: 59 unique scholarships (removed 0 duplicates)
+[2026-03-13T16:45:32.144Z] [INFO] [PIPELINE] Step 3/3: Upserting to Supabase...
+[2026-03-13T16:45:32.543Z] [ERROR] [SUPABASE] Insert error for "Pre-Matric Scholarship Scheme for Minorities": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:32.858Z] [ERROR] [SUPABASE] Insert error for "Post-Matric Scholarship Scheme for Minorities": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:33.165Z] [ERROR] [SUPABASE] Insert error for "Merit Cum Means Scholarship for Professional and Technical Courses CS": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:33.476Z] [ERROR] [SUPABASE] Insert error for "Pre-Matric Scholarship for Students with Disabilities": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:33.792Z] [ERROR] [SUPABASE] Insert error for "Post-Matric Scholarship for Students with Disabilities": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:34.103Z] [ERROR] [SUPABASE] Insert error for "Scholarships for Top Class Education for Students with Disabilities": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:34.472Z] [ERROR] [SUPABASE] Insert error for "National Fellowship and Scholarship for Higher Education of ST Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:34.786Z] [ERROR] [SUPABASE] Insert error for "Central Sector Scheme of Scholarships for College and University Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:35.091Z] [ERROR] [SUPABASE] Insert error for "Pre-Matric Scholarship for SC Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:35.404Z] [ERROR] [SUPABASE] Insert error for "Post-Matric Scholarship for SC Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:35.722Z] [ERROR] [SUPABASE] Insert error for "Top Class Education Scheme for SC Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:36.033Z] [ERROR] [SUPABASE] Insert error for "Pre-Matric Scholarship for OBC Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:36.337Z] [ERROR] [SUPABASE] Insert error for "Post-Matric Scholarship for OBC Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:36.648Z] [ERROR] [SUPABASE] Insert error for "Dr. Ambedkar Post-Matric Scholarship for EBC Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:36.960Z] [ERROR] [SUPABASE] Insert error for "National Means Cum Merit Scholarship (NMMS)": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:37.263Z] [ERROR] [SUPABASE] Insert error for "Prime Minister's Scholarship Scheme For RPF/RPSF": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:37.578Z] [ERROR] [SUPABASE] Insert error for "Prime Minister's Scholarship Scheme for Central Armed Police Forces & Assam Rifles": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:37.891Z] [ERROR] [SUPABASE] Insert error for "Financial Assistance for Education to the Wards of Beedi/Cine/IOMC/LSDM Workers - Pre-Matric": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:38.194Z] [ERROR] [SUPABASE] Insert error for "Financial Assistance for Education to the Wards of Beedi/Cine/IOMC/LSDM Workers - Post-Matric": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:38.496Z] [ERROR] [SUPABASE] Insert error for "PG Indira Gandhi Scholarship for Single Girl Child": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:38.801Z] [ERROR] [SUPABASE] Insert error for "PG Scholarship for University Rank Holders": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:39.104Z] [ERROR] [SUPABASE] Insert error for "Ishan Uday Scholarship for North-Eastern Region": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:39.406Z] [ERROR] [SUPABASE] Insert error for "NET JRF Fellowship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:39.713Z] [ERROR] [SUPABASE] Insert error for "Rajiv Gandhi National Fellowship for SC Candidates": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:40.025Z] [ERROR] [SUPABASE] Insert error for "Maulana Azad National Fellowship for Minority Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:40.343Z] [ERROR] [SUPABASE] Insert error for "AICTE Pragati Scholarship for Girls": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:40.649Z] [ERROR] [SUPABASE] Insert error for "AICTE Saksham Scholarship Scheme for Specially Abled Student": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:40.951Z] [ERROR] [SUPABASE] Insert error for "Swanath Scholarship Scheme (Technical Degree)": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:41.265Z] [ERROR] [SUPABASE] Insert error for "Pragati Scholarship Scheme For Technical Education": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:41.579Z] [ERROR] [SUPABASE] Insert error for "AICTE PG Scholarship for GATE/GPAT Qualified Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:41.884Z] [ERROR] [SUPABASE] Insert error for "AICTE Doctoral Fellowship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:42.186Z] [ERROR] [SUPABASE] Insert error for "Mukhyamantri Medhavi Vidyarthi Yojana": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:42.491Z] [ERROR] [SUPABASE] Insert error for "MahaDBT Post Matric Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:42.795Z] [ERROR] [SUPABASE] Insert error for "Swami Vivekananda Merit Cum Means Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:43.101Z] [ERROR] [SUPABASE] Insert error for "Dr. YSR Vidyadheevena Scheme": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:43.403Z] [ERROR] [SUPABASE] Insert error for "Chief Minister's Scholarship Scheme for Higher Education": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:43.711Z] [ERROR] [SUPABASE] Insert error for "NSP Pre Matric Scholarship for SC Students, Karnataka": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:44.013Z] [ERROR] [SUPABASE] Insert error for "NEC Merit Scholarship (North Eastern Council)": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:44.317Z] [ERROR] [SUPABASE] Insert error for "Telangana State Overseas Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:44.624Z] [ERROR] [SUPABASE] Insert error for "Tamil Nadu Chief Minister's Higher Education Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:44.956Z] [ERROR] [SUPABASE] Insert error for "E-Kalyan Bihar State Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:45.273Z] [ERROR] [SUPABASE] Insert error for "Oasis Scholarship, West Bengal Minority": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:45.578Z] [ERROR] [SUPABASE] Insert error for "Uttar Pradesh Post-Matric Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:45.885Z] [ERROR] [SUPABASE] Insert error for "Rajasthan Ambedkar DBT Voucher Yojana": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:46.198Z] [ERROR] [SUPABASE] Insert error for "Kerala State Merit Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:46.504Z] [ERROR] [SUPABASE] Insert error for "Punjab Merit Cum Means Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:46.832Z] [ERROR] [SUPABASE] Insert error for "Gujarat State Scholarship for SC/ST Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:47.136Z] [ERROR] [SUPABASE] Insert error for "Vidyadhan Scholarship Program": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:47.439Z] [ERROR] [SUPABASE] Insert error for "Reliance Foundation Undergraduate Scholarships": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:47.738Z] [ERROR] [SUPABASE] Insert error for "HDFC Badhte Kadam Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:48.044Z] [ERROR] [SUPABASE] Insert error for "Keep India Smiling Foundational Scholarship Programme": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:48.347Z] [ERROR] [SUPABASE] Insert error for "Tata Scholarship for Cornell University": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:48.684Z] [ERROR] [SUPABASE] Insert error for "Inspire Scholarship for Higher Education (SHE)": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:48.991Z] [ERROR] [SUPABASE] Insert error for "Dr. APJ Abdul Kalam Ignite Awards": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:49.290Z] [ERROR] [SUPABASE] Insert error for "Kishore Vaigyanik Protsahan Yojana (KVPY)": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:49.588Z] [ERROR] [SUPABASE] Insert error for "Prime Minister's Research Fellowship (PMRF)": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:49.888Z] [ERROR] [SUPABASE] Insert error for "National Overseas Scholarship for ST Students": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:50.189Z] [ERROR] [SUPABASE] Insert error for "Wipro Education Fellowship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:50.492Z] [ERROR] [SUPABASE] Insert error for "Azim Premji University Scholarship": new row violates row-level security policy for table "scholarships" 
+[2026-03-13T16:45:50.493Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T16:45:50.494Z] [SUCCESS] [PIPELINE] Pipeline complete in 18.8s
+[2026-03-13T16:45:50.494Z] [INFO] [PIPELINE]   📥 Scraped: 59 total, 59 unique
+[2026-03-13T16:45:50.494Z] [INFO] [PIPELINE]   ✅ Inserted: 0 new scholarships
+[2026-03-13T16:45:50.494Z] [INFO] [PIPELINE]   🔄 Updated: 0 existing scholarships
+[2026-03-13T16:45:50.495Z] [WARN] [PIPELINE]   ❌ Errors: 59 
+[2026-03-13T16:45:50.495Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T16:48:17.397Z] [WARN] [SCRAPER] Using SUPABASE_ANON_KEY. If you hit RLS errors, please provide SUPABASE_SERVICE_ROLE_KEY in .env or disable RLS for 'scholarships' table. 
+[2026-03-13T16:48:17.428Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T16:48:45.022Z] [WARN] [SCRAPER] Using SUPABASE_ANON_KEY. If you hit RLS errors, please provide SUPABASE_SERVICE_ROLE_KEY in .env or disable RLS for 'scholarships' table. 
+[2026-03-13T16:48:45.071Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:14:22.564Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:20:14.189Z] [INFO] [CLI] Running scraper manually via CLI...
+[2026-03-13T17:20:14.190Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T17:20:14.190Z] [INFO] [PIPELINE]   ScholarDoc Hub — Scholarship Scraping Pipeline
+[2026-03-13T17:20:14.191Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T17:20:14.206Z] [INFO] [PIPELINE] Started at 13/3/2026, 10:50:14 pm
+[2026-03-13T17:20:14.207Z] [INFO] [PIPELINE] Step 1/3: Running scrapers from all sources...
+[2026-03-13T17:20:14.207Z] [INFO] [NSP] Starting scrape from NSP...
+[2026-03-13T17:20:14.208Z] [INFO] [NSP] Attempting live page fetch from scholarships.gov.in...
+[2026-03-13T17:20:14.708Z] [INFO] [NSP] Live page fetched successfully (107383 bytes)
+[2026-03-13T17:20:14.711Z] [SUCCESS] [NSP] Scraped 19 scholarships in 0.5s
+[2026-03-13T17:20:14.712Z] [INFO] [UGC] Starting scrape from UGC...
+[2026-03-13T17:20:14.713Z] [SUCCESS] [UGC] Scraped 6 scholarships in 0.0s
+[2026-03-13T17:20:14.713Z] [INFO] [AICTE] Starting scrape from AICTE...
+[2026-03-13T17:20:14.714Z] [SUCCESS] [AICTE] Scraped 6 scholarships in 0.0s
+[2026-03-13T17:20:14.714Z] [INFO] [STATE_PORTALS] Starting scrape from STATE_PORTALS...
+[2026-03-13T17:20:14.715Z] [SUCCESS] [STATE_PORTALS] Scraped 16 scholarships in 0.0s
+[2026-03-13T17:20:14.716Z] [INFO] [PRIVATE] Starting scrape from PRIVATE...
+[2026-03-13T17:20:14.717Z] [SUCCESS] [PRIVATE] Scraped 12 scholarships in 0.0s
+[2026-03-13T17:20:14.718Z] [INFO] [PIPELINE] Step 1 complete: Scraped 59 scholarships from 5 sources
+[2026-03-13T17:20:14.718Z] [INFO] [PIPELINE] Step 2/3: Deduplicating scholarships...
+[2026-03-13T17:20:14.719Z] [INFO] [PIPELINE] Step 2 complete: 59 unique scholarships (removed 0 duplicates)
+[2026-03-13T17:20:14.719Z] [INFO] [PIPELINE] Step 3/3: Upserting to Supabase...
+[2026-03-13T17:20:35.413Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T17:20:35.414Z] [SUCCESS] [PIPELINE] Pipeline complete in 21.2s
+[2026-03-13T17:20:35.415Z] [INFO] [PIPELINE]   📥 Scraped: 59 total, 59 unique
+[2026-03-13T17:20:35.415Z] [INFO] [PIPELINE]   ✅ Inserted: 59 new scholarships
+[2026-03-13T17:20:35.416Z] [INFO] [PIPELINE]   🔄 Updated: 0 existing scholarships
+[2026-03-13T17:20:35.416Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T17:26:13.512Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:26:13.547Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:38:26.793Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:38:49.193Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:38:49.948Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:57:09.523Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:57:43.409Z] [INFO] [SCHEDULER] 📅 Daily scholarship scraper scheduled — runs at 2:00 AM IST
+[2026-03-13T17:57:52.267Z] [INFO] [CLI] Running scraper manually via CLI...
+[2026-03-13T17:57:52.269Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T17:57:52.269Z] [INFO] [PIPELINE]   ScholarDoc Hub — Scholarship Scraping Pipeline
+[2026-03-13T17:57:52.269Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T17:57:52.285Z] [INFO] [PIPELINE] Started at 13/3/2026, 11:27:52 pm
+[2026-03-13T17:57:52.286Z] [INFO] [PIPELINE] Step 1/3: Running scrapers from all sources...
+[2026-03-13T17:57:52.286Z] [INFO] [NSP] Starting scrape from NSP...
+[2026-03-13T17:57:52.286Z] [INFO] [NSP] Attempting live page fetch from scholarships.gov.in...
+[2026-03-13T17:57:52.738Z] [INFO] [NSP] Live page fetched successfully (107383 bytes)
+[2026-03-13T17:57:52.741Z] [SUCCESS] [NSP] Scraped 19 scholarships in 0.5s
+[2026-03-13T17:57:52.742Z] [INFO] [UGC] Starting scrape from UGC...
+[2026-03-13T17:57:52.743Z] [SUCCESS] [UGC] Scraped 6 scholarships in 0.0s
+[2026-03-13T17:57:52.743Z] [INFO] [AICTE] Starting scrape from AICTE...
+[2026-03-13T17:57:52.744Z] [SUCCESS] [AICTE] Scraped 6 scholarships in 0.0s
+[2026-03-13T17:57:52.744Z] [INFO] [STATE_PORTALS] Starting scrape from STATE_PORTALS...
+[2026-03-13T17:57:52.745Z] [SUCCESS] [STATE_PORTALS] Scraped 16 scholarships in 0.0s
+[2026-03-13T17:57:52.746Z] [INFO] [PRIVATE] Starting scrape from PRIVATE...
+[2026-03-13T17:57:52.746Z] [SUCCESS] [PRIVATE] Scraped 12 scholarships in 0.0s
+[2026-03-13T17:57:52.747Z] [INFO] [PIPELINE] Step 1 complete: Scraped 59 scholarships from 5 sources
+[2026-03-13T17:57:52.747Z] [INFO] [PIPELINE] Step 2/3: Deduplicating scholarships...
+[2026-03-13T17:57:52.748Z] [INFO] [PIPELINE] Step 2 complete: 59 unique scholarships (removed 0 duplicates)
+[2026-03-13T17:57:52.748Z] [INFO] [PIPELINE] Step 3/3: Upserting to Supabase...
+[2026-03-13T17:57:53.227Z] [ERROR] [SUPABASE] Update error for "Pre-Matric Scholarship Scheme for Minorities": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:53.604Z] [ERROR] [SUPABASE] Update error for "Post-Matric Scholarship Scheme for Minorities": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:53.966Z] [ERROR] [SUPABASE] Update error for "Merit Cum Means Scholarship for Professional and Technical Courses CS": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:54.325Z] [ERROR] [SUPABASE] Update error for "Pre-Matric Scholarship for Students with Disabilities": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:54.677Z] [ERROR] [SUPABASE] Update error for "Post-Matric Scholarship for Students with Disabilities": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:55.050Z] [ERROR] [SUPABASE] Update error for "Scholarships for Top Class Education for Students with Disabilities": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:55.395Z] [ERROR] [SUPABASE] Update error for "National Fellowship and Scholarship for Higher Education of ST Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:55.808Z] [ERROR] [SUPABASE] Update error for "Central Sector Scheme of Scholarships for College and University Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:56.172Z] [ERROR] [SUPABASE] Update error for "Pre-Matric Scholarship for SC Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:56.533Z] [ERROR] [SUPABASE] Update error for "Post-Matric Scholarship for SC Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:56.884Z] [ERROR] [SUPABASE] Update error for "Top Class Education Scheme for SC Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:57.212Z] [ERROR] [SUPABASE] Update error for "Pre-Matric Scholarship for OBC Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:57.538Z] [ERROR] [SUPABASE] Update error for "Post-Matric Scholarship for OBC Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:57.850Z] [ERROR] [SUPABASE] Update error for "Dr. Ambedkar Post-Matric Scholarship for EBC Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:58.160Z] [ERROR] [SUPABASE] Update error for "National Means Cum Merit Scholarship (NMMS)": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:58.469Z] [ERROR] [SUPABASE] Update error for "Prime Minister's Scholarship Scheme For RPF/RPSF": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:58.778Z] [ERROR] [SUPABASE] Update error for "Prime Minister's Scholarship Scheme for Central Armed Police Forces & Assam Rifles": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:59.093Z] [ERROR] [SUPABASE] Update error for "Financial Assistance for Education to the Wards of Beedi/Cine/IOMC/LSDM Workers - Pre-Matric": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:59.402Z] [ERROR] [SUPABASE] Update error for "Financial Assistance for Education to the Wards of Beedi/Cine/IOMC/LSDM Workers - Post-Matric": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:57:59.739Z] [ERROR] [SUPABASE] Update error for "PG Indira Gandhi Scholarship for Single Girl Child": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:00.084Z] [ERROR] [SUPABASE] Update error for "PG Scholarship for University Rank Holders": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:00.397Z] [ERROR] [SUPABASE] Update error for "Ishan Uday Scholarship for North-Eastern Region": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:00.710Z] [ERROR] [SUPABASE] Update error for "NET JRF Fellowship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:01.016Z] [ERROR] [SUPABASE] Update error for "Rajiv Gandhi National Fellowship for SC Candidates": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:01.324Z] [ERROR] [SUPABASE] Update error for "Maulana Azad National Fellowship for Minority Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:01.633Z] [ERROR] [SUPABASE] Update error for "AICTE Pragati Scholarship for Girls": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:01.960Z] [ERROR] [SUPABASE] Update error for "AICTE Saksham Scholarship Scheme for Specially Abled Student": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:02.268Z] [ERROR] [SUPABASE] Update error for "Swanath Scholarship Scheme (Technical Degree)": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:02.578Z] [ERROR] [SUPABASE] Update error for "Pragati Scholarship Scheme For Technical Education": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:02.893Z] [ERROR] [SUPABASE] Update error for "AICTE PG Scholarship for GATE/GPAT Qualified Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:03.204Z] [ERROR] [SUPABASE] Update error for "AICTE Doctoral Fellowship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:03.514Z] [ERROR] [SUPABASE] Update error for "Mukhyamantri Medhavi Vidyarthi Yojana": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:03.822Z] [ERROR] [SUPABASE] Update error for "MahaDBT Post Matric Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:04.129Z] [ERROR] [SUPABASE] Update error for "Swami Vivekananda Merit Cum Means Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:04.444Z] [ERROR] [SUPABASE] Update error for "Dr. YSR Vidyadheevena Scheme": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:04.750Z] [ERROR] [SUPABASE] Update error for "Chief Minister's Scholarship Scheme for Higher Education": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:05.057Z] [ERROR] [SUPABASE] Update error for "NSP Pre Matric Scholarship for SC Students, Karnataka": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:05.369Z] [ERROR] [SUPABASE] Update error for "NEC Merit Scholarship (North Eastern Council)": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:05.674Z] [ERROR] [SUPABASE] Update error for "Telangana State Overseas Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:05.991Z] [ERROR] [SUPABASE] Update error for "Tamil Nadu Chief Minister's Higher Education Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:06.300Z] [ERROR] [SUPABASE] Update error for "E-Kalyan Bihar State Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:06.606Z] [ERROR] [SUPABASE] Update error for "Oasis Scholarship, West Bengal Minority": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:06.912Z] [ERROR] [SUPABASE] Update error for "Uttar Pradesh Post-Matric Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:07.218Z] [ERROR] [SUPABASE] Update error for "Rajasthan Ambedkar DBT Voucher Yojana": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:07.529Z] [ERROR] [SUPABASE] Update error for "Kerala State Merit Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:07.841Z] [ERROR] [SUPABASE] Update error for "Punjab Merit Cum Means Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:08.155Z] [ERROR] [SUPABASE] Update error for "Gujarat State Scholarship for SC/ST Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:08.472Z] [ERROR] [SUPABASE] Update error for "Vidyadhan Scholarship Program": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:08.782Z] [ERROR] [SUPABASE] Update error for "Reliance Foundation Undergraduate Scholarships": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:09.096Z] [ERROR] [SUPABASE] Update error for "HDFC Badhte Kadam Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:09.432Z] [ERROR] [SUPABASE] Update error for "Keep India Smiling Foundational Scholarship Programme": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:09.742Z] [ERROR] [SUPABASE] Update error for "Tata Scholarship for Cornell University": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:10.050Z] [ERROR] [SUPABASE] Update error for "Inspire Scholarship for Higher Education (SHE)": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:10.363Z] [ERROR] [SUPABASE] Update error for "Dr. APJ Abdul Kalam Ignite Awards": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:10.685Z] [ERROR] [SUPABASE] Update error for "Kishore Vaigyanik Protsahan Yojana (KVPY)": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:10.998Z] [ERROR] [SUPABASE] Update error for "Prime Minister's Research Fellowship (PMRF)": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:11.308Z] [ERROR] [SUPABASE] Update error for "National Overseas Scholarship for ST Students": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:11.619Z] [ERROR] [SUPABASE] Update error for "Wipro Education Fellowship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:11.931Z] [ERROR] [SUPABASE] Update error for "Azim Premji University Scholarship": Could not find the 'gender' column of 'scholarships' in the schema cache 
+[2026-03-13T17:58:11.932Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
+[2026-03-13T17:58:11.932Z] [SUCCESS] [PIPELINE] Pipeline complete in 19.7s
+[2026-03-13T17:58:11.933Z] [INFO] [PIPELINE]   📥 Scraped: 59 total, 59 unique
+[2026-03-13T17:58:11.933Z] [INFO] [PIPELINE]   ✅ Inserted: 0 new scholarships
+[2026-03-13T17:58:11.933Z] [INFO] [PIPELINE]   🔄 Updated: 0 existing scholarships
+[2026-03-13T17:58:11.933Z] [WARN] [PIPELINE]   ❌ Errors: 59 
+[2026-03-13T17:58:11.934Z] [INFO] [PIPELINE] ═══════════════════════════════════════════════
