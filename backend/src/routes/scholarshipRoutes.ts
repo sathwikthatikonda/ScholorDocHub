@@ -49,10 +49,11 @@ router.get("/", async (req: express.Request, res: express.Response) => {
                 query = query.eq("disability_status", false);
             }
 
-            const { data: chunk, error } = await query;
+            const { data: chunk, error: chunkError } = await query;
             
-            if (error) {
-                fetchError = error;
+            if (chunkError) {
+                console.error("❌ Supabase chunk fetch error:", chunkError);
+                fetchError = chunkError;
                 break;
             }
 
