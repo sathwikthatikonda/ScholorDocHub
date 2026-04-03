@@ -99,7 +99,7 @@ export default function AIAssistant() {
 
         try {
             const selectedLangName = languagesList.find((l) => l.code === language)?.name || "English";
-            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+            const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
             const response = await fetch(`${backendUrl}/api/ai/chat`, {
                 method: "POST",
                 headers: {
