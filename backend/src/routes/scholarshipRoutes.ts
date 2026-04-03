@@ -13,71 +13,18 @@ router.get("/", async (req: express.Request, res: express.Response) => {
         const { educationLevel, category, incomeLimit, state, marksPercentage, minorityStatus, disabilityStatus, ids } = req.query;
         console.log("🔍 Received Query Params:", { educationLevel, category, incomeLimit, state, marksPercentage, minorityStatus, disabilityStatus, ids });
 
-        let allData: any[] = [];
-        let from = 0;
-        const PAGE_LIMIT = 1000;
-        let hasMore = true;
-        let fetchError: any = null;
+        let limit = 1000; // Fetch top 1000 for verification
+        let { data, error: fetchError } = await supabase
+            .from("scholarships")
+            .select("*")
+            .limit(limit);
 
-        while (hasMore) {
-            let query = supabase.from("scholarships").select("*").order("name", { ascending: true }).range(from, from + PAGE_LIMIT - 1);
-
-            if (ids) {
-                const idList = (ids as string).split(",");
-                query = query.in("id", idList);
-            }
-
-            if (state && state !== "All India") {
-                query = query.or(`state.eq.${state},state.eq.All India`);
-            }
-
-            if (incomeLimit) {
-                const income = Number(incomeLimit);
-                query = query.or(`income_limit.eq.0,income_limit.gte.${income}`);
-            }
-
-            if (marksPercentage) {
-                const marks = Number(marksPercentage);
-                query = query.or(`marks_requirement.eq.0,marks_requirement.lte.${marks}`);
-            }
-
-            if (minorityStatus === "false") {
-                query = query.eq("minority_status", false);
-            }
-
-            if (disabilityStatus === "false") {
-                query = query.eq("disability_status", false);
-            }
-
-            const { data: chunk, error: chunkError } = await query;
-            
-            if (chunkError) {
-                console.error("❌ Supabase chunk fetch error:", chunkError);
-                fetchError = chunkError;
-                break;
-            }
-
-            if (chunk && chunk.length > 0) {
-                allData = allData.concat(chunk);
-                if (chunk.length < PAGE_LIMIT) {
-                    hasMore = false;
-                } else {
-                    from += PAGE_LIMIT;
-                }
-            } else {
-                hasMore = false;
-            }
+        if (fetchError) {
+            console.error("❌ Supabase fetch error:", fetchError);
+            throw fetchError;
         }
 
-        const data = allData;
-        const error = fetchError;
-
-        if (error) {
-            console.error("Supabase query error:", error);
-            throw error;
-        }
-
-        console.log(`[DEBUG] Found ${data?.length || 0} scholarships in DB matching query`);
+        console.log(`[DEBUG] Found ${data?.length || 0} scholarships in DB (Total Cache)`);
         let filtered = data || [];
 
         // Helper to ensure array and handle nulls
