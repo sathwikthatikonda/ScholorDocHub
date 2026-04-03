@@ -11,6 +11,7 @@ const router = express.Router();
 router.get("/", async (req: express.Request, res: express.Response) => {
     try {
         const { educationLevel, category, incomeLimit, state, marksPercentage, minorityStatus, disabilityStatus, ids } = req.query;
+        console.log("🔍 Received Query Params:", { educationLevel, category, incomeLimit, state, marksPercentage, minorityStatus, disabilityStatus, ids });
 
         let allData: any[] = [];
         let from = 0;
@@ -19,7 +20,7 @@ router.get("/", async (req: express.Request, res: express.Response) => {
         let fetchError: any = null;
 
         while (hasMore) {
-            let query = supabase.from("scholarships").select("*").order("created_at", { ascending: false }).range(from, from + PAGE_LIMIT - 1);
+            let query = supabase.from("scholarships").select("*").order("name", { ascending: true }).range(from, from + PAGE_LIMIT - 1);
 
             if (ids) {
                 const idList = (ids as string).split(",");
