@@ -273,7 +273,9 @@ export default function ScholarshipDetails() {
     const [loading, setLoading] = useState(true);
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [isSaved, setIsSaved] = useState(false);
+    const [isApplied, setIsApplied] = useState(false);
     const [saving, setSaving] = useState(false);
+    const [applying, setApplying] = useState(false);
     const [checkedDocs, setCheckedDocs] = useState<Record<number, boolean>>({});
     const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
     const [userLocation, setUserLocation] = useState<{ lat: number, lng: number } | null>(null);
@@ -291,9 +293,12 @@ export default function ScholarshipDetails() {
                 const res = await api.get(`/scholarships/${params.id}`);
                 setScholarship(res.data);
 
-                // Check if already saved
+                // Check if already saved or applied
                 if (user?.savedScholarships?.includes(String(params.id))) {
                     setIsSaved(true);
+                }
+                if (user?.appliedScholarships?.includes(String(params.id))) {
+                    setIsApplied(true);
                 }
             } catch (err) {
                 console.error("Failed to fetch scholarship:", err);
@@ -337,6 +342,28 @@ export default function ScholarshipDetails() {
             console.error("Failed to save scholarship:", err);
         } finally {
             setSaving(false);
+        }
+    };
+
+    const handleApply = async () => {
+        if (applying) return;
+        setApplying(true);
+        try {
+            if (isApplied) {
+                const res = await api.delete(`/users/apply-scholarship/${params.id}`);
+                setUser({ ...user, appliedScholarships: res.data.appliedScholarships });
+                setIsApplied(false);
+            } else {
+                const res = await api.post(`/users/apply-scholarship/${params.id}`);
+                setUser({ ...user, appliedScholarships: res.data.appliedScholarships });
+                setIsApplied(true);
+                setShowSuccess(true);
+                setTimeout(() => setShowSuccess(false), 3000);
+            }
+        } catch (err) {
+            console.error("Failed to mark scholarship as applied:", err);
+        } finally {
+            setApplying(false);
         }
     };
 
@@ -579,28 +606,42 @@ export default function ScholarshipDetails() {
                                             exit={{ opacity: 0, scale: 0.9 }}
                                             className="bg-green-600 text-white text-[11px] font-bold py-2 px-4 rounded-lg text-center shadow-lg"
                                         >
-                                            Adding to Saved Applications...
+                                            {isApplied ? "Updated Applied Applications..." : "Adding to Saved Applications..."}
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
 
                                 <button
-                                    onClick={handleSave}
-                                    disabled={saving}
-                                    className={`w-full py-4 px-6 rounded-xl font-bold flex items-center justify-center gap-3 transition-all border-2 ${isSaved
+                                    onClick={handleApply}
+                                    disabled={applying}
+                                    className={`w-full py-4 px-6 rounded-xl font-bold flex items-center justify-center gap-3 transition-all border-2 ${isApplied
                                         ? "bg-green-50 border-green-200 text-green-700 hover:bg-green-100"
-                                        : "bg-white border-slate-200 text-slate-700 hover:border-primary-300 hover:bg-slate-50"
+                                        : "bg-white border-primary-100 text-primary-700 hover:border-primary-300 hover:bg-primary-50"
                                         }`}
                                 >
-                                    {saving ? (
+                                    {applying ? (
                                         <Loader2 className="w-5 h-5 animate-spin" />
                                     ) : (
-                                        <CheckCircle className={`w-5 h-5 ${isSaved ? 'fill-green-600' : ''}`} />
+                                        <CheckCircle className={`w-5 h-5 ${isApplied ? 'fill-green-600 border-none' : ''}`} />
                                     )}
-                                    {isSaved ? "Marked as Applied" : "Mark as Applied"}
+                                    {isApplied ? "Marked as Applied" : "Mark as Applied"}
                                 </button>
 
-                                <Link href="/dashboard" className="premium-button-secondary w-full">
+                                <div className="flex gap-3">
+                                    <button
+                                        onClick={handleSave}
+                                        disabled={saving}
+                                        className={`flex-1 py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all border-2 text-sm ${isSaved
+                                            ? "bg-amber-50 border-amber-200 text-amber-700"
+                                            : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
+                                            }`}
+                                    >
+                                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-amber-600 border-none' : ''}`} />}
+                                        {isSaved ? "Saved" : "Save for Later"}
+                                    </button>
+                                </div>
+
+                                <Link href="/dashboard" className="premium-button-secondary w-full text-center">
                                     {t("ReturnToMatches", language)}
                                 </Link>
                             </div>

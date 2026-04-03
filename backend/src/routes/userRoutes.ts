@@ -17,7 +17,8 @@ router.get("/profile", protect, async (req: AuthRequest, res: Response) => {
             state: req.user.state,
             mobileNumber: req.user.mobileNumber,
             profile: req.user.profile,
-            savedScholarships: req.user._supabaseUser?.user_metadata?.saved_scholarships || []
+            savedScholarships: req.user._supabaseUser?.user_metadata?.saved_scholarships || [],
+            appliedScholarships: req.user._supabaseUser?.user_metadata?.applied_scholarships || []
         });
     } catch (error) {
         console.error("Get profile error:", error);
@@ -150,6 +151,82 @@ router.delete("/save-scholarship/:id", protect, async (req: AuthRequest, res: Re
         res.json({ savedScholarships: data.user?.user_metadata?.saved_scholarships });
     } catch (error) {
         console.error("Remove scholarship error:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+// Mark a scholarship as applied (stored in user_metadata)
+router.post("/apply-scholarship/:id", protect, async (req: AuthRequest, res: Response) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) return res.status(401).json({ message: "Not authorized" });
+
+        const { createClient } = await import("@supabase/supabase-js");
+        const userSupabase = createClient(
+            process.env.SUPABASE_URL || "",
+            process.env.SUPABASE_ANON_KEY || "",
+            { auth: { persistSession: false } }
+        );
+
+        await userSupabase.auth.setSession({
+            access_token: token,
+            refresh_token: token
+        });
+
+        const currentApplied: string[] = req.user._supabaseUser?.user_metadata?.applied_scholarships || [];
+        const scholarshipId = String(req.params.id);
+        if (!currentApplied.includes(scholarshipId)) {
+            currentApplied.push(scholarshipId);
+        }
+
+        const { data, error } = await userSupabase.auth.updateUser({
+            data: {
+                ...req.user._supabaseUser?.user_metadata,
+                applied_scholarships: currentApplied
+            }
+        });
+
+        if (error) return res.status(500).json({ message: "Failed to mark as applied" });
+        res.json({ appliedScholarships: data.user?.user_metadata?.applied_scholarships });
+    } catch (error) {
+        console.error("Apply scholarship error:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+// Remove an applied scholarship
+router.delete("/apply-scholarship/:id", protect, async (req: AuthRequest, res: Response) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) return res.status(401).json({ message: "Not authorized" });
+
+        const { createClient } = await import("@supabase/supabase-js");
+        const userSupabase = createClient(
+            process.env.SUPABASE_URL || "",
+            process.env.SUPABASE_ANON_KEY || "",
+            { auth: { persistSession: false } }
+        );
+
+        await userSupabase.auth.setSession({
+            access_token: token,
+            refresh_token: token
+        });
+
+        let currentApplied: string[] = req.user._supabaseUser?.user_metadata?.applied_scholarships || [];
+        const removeId = String(req.params.id);
+        currentApplied = currentApplied.filter((id: string) => id !== removeId);
+
+        const { data, error } = await userSupabase.auth.updateUser({
+            data: {
+                ...req.user._supabaseUser?.user_metadata,
+                applied_scholarships: currentApplied
+            }
+        });
+
+        if (error) return res.status(500).json({ message: "Failed to remove applied scholarship" });
+        res.json({ appliedScholarships: data.user?.user_metadata?.applied_scholarships });
+    } catch (error) {
+        console.error("Remove applied scholarship error:", error);
         res.status(500).json({ message: "Server error" });
     }
 });

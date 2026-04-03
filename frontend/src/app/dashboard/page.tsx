@@ -28,13 +28,13 @@ export default function Dashboard() {
                 let query = "";
 
                 if (activeTab === "applied") {
-                    const savedIds = user?.savedScholarships || [];
-                    if (savedIds.length === 0) {
+                    const appliedIds = user?.appliedScholarships || [];
+                    if (appliedIds.length === 0) {
                         setScholarships([]);
                         setLoading(false);
                         return;
                     }
-                    query = `?ids=${savedIds.join(",")}`;
+                    query = `?ids=${appliedIds.join(",")}`;
                 } else if (activeTab === "discovered") {
                     query = `?all=true`;
                 } else {
