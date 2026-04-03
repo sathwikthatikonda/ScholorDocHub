@@ -29,6 +29,7 @@ export default function Dashboard() {
 
                 if (activeTab === "applied") {
                     const appliedIds = user?.appliedScholarships || [];
+                    console.log("📋 Applied Scholarship IDs:", appliedIds, "User object keys:", Object.keys(user || {}));
                     if (appliedIds.length === 0) {
                         setScholarships([]);
                         setLoading(false);

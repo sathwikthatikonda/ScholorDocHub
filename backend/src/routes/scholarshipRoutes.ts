@@ -13,18 +13,64 @@ router.get("/", async (req: express.Request, res: express.Response) => {
         const { educationLevel, category, incomeLimit, state, marksPercentage, minorityStatus, disabilityStatus, ids } = req.query;
         console.log("🔍 Received Query Params:", { educationLevel, category, incomeLimit, state, marksPercentage, minorityStatus, disabilityStatus, ids });
 
-        let limit = 1000; // Fetch top 1000 for verification
+        // === APPLIED SCHOLARSHIPS: fetch by specific IDs only ===
+        if (ids) {
+            const idList = (ids as string).split(",");
+            console.log("🎯 Fetching specific IDs:", idList);
+            
+            const { data: idData, error: idError } = await supabase
+                .from("scholarships")
+                .select("*")
+                .in("id", idList);
+
+            if (idError) {
+                console.error("❌ Supabase ID fetch error:", idError);
+                throw idError;
+            }
+
+            console.log(`[DEBUG] Found ${idData?.length || 0} scholarships for ${idList.length} requested IDs`);
+
+            const ensureArray = (val: any) => {
+                if (!val) return ["All"];
+                if (Array.isArray(val)) return val.length > 0 ? val : ["All"];
+                return [val];
+            };
+
+            const mapped = (idData || []).map(s => ({
+                _id: s.id,
+                id: s.id,
+                name: s.name,
+                provider: s.provider,
+                eligibilityCriteria: s.eligibility_criteria,
+                educationLevel: ensureArray(s.education_level),
+                category: ensureArray(s.category),
+                incomeLimit: s.income_limit || 0,
+                marksRequirement: s.marks_requirement || 0,
+                state: s.state || "All India",
+                description: s.description,
+                benefits: s.benefits,
+                deadline: s.deadline,
+                requiredDocuments: s.required_documents || [],
+                officialWebsite: s.official_website,
+                minorityStatus: !!s.minority_status,
+                disabilityStatus: !!s.disability_status
+            }));
+
+            return res.json(mapped);
+        }
+
+        // === REGULAR SCHOLARSHIPS: fetch all + filter ===
         let { data, error: fetchError } = await supabase
             .from("scholarships")
             .select("*")
-            .limit(limit);
+            .limit(1000);
 
         if (fetchError) {
             console.error("❌ Supabase fetch error:", fetchError);
             throw fetchError;
         }
 
-        console.log(`[DEBUG] Found ${data?.length || 0} scholarships in DB (Total Cache)`);
+        console.log(`[DEBUG] Found ${data?.length || 0} scholarships in DB`);
         let filtered = data || [];
 
         // Helper to ensure array and handle nulls

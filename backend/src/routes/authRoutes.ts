@@ -89,6 +89,8 @@ router.post("/login", async (req: Request, res: Response) => {
             state: data.user.user_metadata?.state,
             mobileNumber: data.user.user_metadata?.mobile_number,
             profile: data.user.user_metadata?.profile || {},
+            savedScholarships: data.user.user_metadata?.saved_scholarships || [],
+            appliedScholarships: data.user.user_metadata?.applied_scholarships || [],
             token: data.session.access_token
         });
     } catch (error) {

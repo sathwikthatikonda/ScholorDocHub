@@ -272,9 +272,7 @@ export default function ScholarshipDetails() {
     const [scholarship, setScholarship] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [isSpeaking, setIsSpeaking] = useState(false);
-    const [isSaved, setIsSaved] = useState(false);
     const [isApplied, setIsApplied] = useState(false);
-    const [saving, setSaving] = useState(false);
     const [applying, setApplying] = useState(false);
     const [checkedDocs, setCheckedDocs] = useState<Record<number, boolean>>({});
     const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
@@ -293,10 +291,7 @@ export default function ScholarshipDetails() {
                 const res = await api.get(`/scholarships/${params.id}`);
                 setScholarship(res.data);
 
-                // Check if already saved or applied
-                if (user?.savedScholarships?.includes(String(params.id))) {
-                    setIsSaved(true);
-                }
+                // Check if already applied
                 if (user?.appliedScholarships?.includes(String(params.id))) {
                     setIsApplied(true);
                 }
@@ -319,31 +314,9 @@ export default function ScholarshipDetails() {
         return () => {
             window.speechSynthesis.cancel();
         };
-    }, [params.id, token, router, user?.savedScholarships]);
+    }, [params.id, token, router, user?.appliedScholarships]);
 
     const [showSuccess, setShowSuccess] = useState(false);
-
-    const handleSave = async () => {
-        if (saving) return;
-        setSaving(true);
-        try {
-            if (isSaved) {
-                const res = await api.delete(`/users/save-scholarship/${params.id}`);
-                setUser({ ...user, savedScholarships: res.data.savedScholarships });
-                setIsSaved(false);
-            } else {
-                const res = await api.post(`/users/save-scholarship/${params.id}`);
-                setUser({ ...user, savedScholarships: res.data.savedScholarships });
-                setIsSaved(true);
-                setShowSuccess(true);
-                setTimeout(() => setShowSuccess(false), 3000);
-            }
-        } catch (err) {
-            console.error("Failed to save scholarship:", err);
-        } finally {
-            setSaving(false);
-        }
-    };
 
     const handleApply = async () => {
         if (applying) return;
@@ -626,20 +599,6 @@ export default function ScholarshipDetails() {
                                     )}
                                     {isApplied ? "Marked as Applied" : "Mark as Applied"}
                                 </button>
-
-                                <div className="flex gap-3">
-                                    <button
-                                        onClick={handleSave}
-                                        disabled={saving}
-                                        className={`flex-1 py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all border-2 text-sm ${isSaved
-                                            ? "bg-amber-50 border-amber-200 text-amber-700"
-                                            : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100"
-                                            }`}
-                                    >
-                                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-amber-600 border-none' : ''}`} />}
-                                        {isSaved ? "Saved" : "Save for Later"}
-                                    </button>
-                                </div>
 
                                 <Link href="/dashboard" className="premium-button-secondary w-full text-center">
                                     {t("ReturnToMatches", language)}
