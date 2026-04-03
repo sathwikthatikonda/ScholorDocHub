@@ -36,7 +36,8 @@ export default function HelpChatBot() {
         setIsLoading(true);
 
         try {
-            const response = await fetch("http://localhost:5000/api/ai/chat", {
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+            const response = await fetch(`${backendUrl}/api/ai/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ text: userMessage.content, lang: "English" }),

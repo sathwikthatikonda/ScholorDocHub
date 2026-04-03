@@ -99,7 +99,8 @@ export default function AIAssistant() {
 
         try {
             const selectedLangName = languagesList.find((l) => l.code === language)?.name || "English";
-            const response = await fetch("http://localhost:5000/api/ai/chat", {
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
+            const response = await fetch(`${backendUrl}/api/ai/chat`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
