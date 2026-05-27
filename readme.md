@@ -9,8 +9,7 @@ A smart scholarship discovery and eligibility platform that helps students find 
 📄 Multi-step scholarship application form
 🔍 Personalized scholarship recommendations
 📱 Responsive and modern UI
-✅ Review & verification workflow 
-#🛠️ Tech Stack
+✅ Review & verification workflow                                                                                                                              #   🛠️ Tech Stack
 Frontend
 React.js / Next.js
 Tailwind CSS
