@@ -42,52 +42,6 @@ The ScholorDocHub application follows a client-server architecture with a clear 
 *   **Database**: Supabase, leveraging PostgreSQL, stores scholarship data, user profiles, and metadata.
 *   **External Services**: Includes Supabase for authentication, Google Gemini AI for intelligent assistance, and various scholarship portals as data sources.
 
-
-## 🏛️ Architecture
-
-The ScholorDocHub application follows a client-server architecture with a clear separation of concerns between the frontend, backend, and external services.
-
-```mermaid
-graph TD
-    User((User))
-
-    subgraph Frontend [Frontend - Next.js]
-        UI[UI: Tailwind CSS / Framer Motion]
-        State[State: Zustand]
-        Comp[React Components]
-    end
-
-    subgraph Backend [Backend - Express.js]
-        API[REST Endpoints]
-        Scraper[Scholarship Scraper - Puppeteer/Cheerio]
-        Scheduler[Node-Cron Scheduler]
-        Auth_Int[Auth Integration]
-    end
-
-    subgraph Database [Database - Supabase/PostgreSQL]
-        DB_S[(Scholarships Table)]
-        DB_U[(User Profiles & Metadata)]
-    end
-
-    subgraph External [External Services]
-        S_Auth[Supabase Auth]
-        Gemini[Google Gemini AI]
-        Sources[Scholarship Portals - NSP/UGC]
-    end
-
-    %% Interactions
-    User -->|Interacts| UI
-    UI -->|API Calls| API
-    API -->|Queries/Updates| DB_S
-    API -->|AI Chat & Voice| Gemini
-    API -->|Scrapes Data| Sources
-    Sources -->|Scholarship Info| Scraper
-    Scraper -->|Ingests Data| DB_S
-    UI -->|Authentication| S_Auth
-    S_Auth <-->|Linked Metadata| DB_U
-    API -->|Auth Verification| S_Auth
-
-
 ## 🔄 Workflow
 
 ### Data Ingestion (Scraping)
