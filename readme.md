@@ -42,9 +42,13 @@ The ScholorDocHub application follows a client-server architecture with a clear 
 *   **Database**: Supabase, leveraging PostgreSQL, stores scholarship data, user profiles, and metadata.
 *   **External Services**: Includes Supabase for authentication, Google Gemini AI for intelligent assistance, and various scholarship portals as data sources.
 
-Below is a high-level architectural diagram illustrating the interaction between these components:
 
-![ScholorDocHub Architecture Diagram]graph TD
+## 🏛️ Architecture
+
+The ScholorDocHub application follows a client-server architecture with a clear separation of concerns between the frontend, backend, and external services.
+
+```mermaid
+graph TD
     User((User))
 
     subgraph Frontend [Frontend - Next.js]
