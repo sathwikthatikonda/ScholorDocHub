@@ -115,12 +115,3 @@ Below is a high-level architectural diagram illustrating the interaction between
 *   Supabase Account
 *   Google Gemini API Key
 
-### Backend Setup
-1. Navigate to the `backend` directory.
-2. Install dependencies: `npm install`.
-3. Create a `.env` file and add:
-   ```env
-   PORT=5000
-   SUPABASE_URL=your_supabase_url
-   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-   GEMINI_API_KEY=your_gemini_api_key
